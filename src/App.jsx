@@ -200,11 +200,6 @@ export default function App() {
           {/* ── BODY ── */}
           <div style={{ background:'#FFFDF7', padding:'28px 32px' }}>
 
-            {/* Date */}
-            <div style={{ textAlign:'right', fontSize:12, color:'#6B5C40', marginBottom:16, fontFamily:'Georgia, serif' }}>
-              29 June 2026
-            </div>
-
             {/* Greeting */}
             <div style={{ fontSize:22, color:'#7A1414', marginBottom:20, fontWeight:400 }}>
               அன்புடையீர், வணக்கம்.
@@ -227,14 +222,6 @@ export default function App() {
             <div style={{ margin:'24px 0', background:'#7A1414', borderRadius:6, padding:'12px 20px', display:'flex', alignItems:'center', gap:12 }}>
               <span style={{ fontSize:20 }}>📖</span>
               <span style={{ fontSize:15, color:'#FFE8A0', fontFamily:'Tiro Tamil, serif' }}>இந்த அறநெறிக் கதைகளைப் படிக்க</span>
-            </div>
-
-            {/* URL box */}
-            <div style={{ background:'#FFF9E6', border:'2px solid #B8860B', borderRadius:6, padding:'12px 20px', textAlign:'center', marginBottom:24 }}>
-              <a href="https://tamilneethi.vercel.app/" target="_blank" rel="noopener"
-                style={{ fontSize:17, color:'#0066CC', fontFamily:'Georgia, serif', fontWeight:700, textDecoration:'underline' }}>
-                https://tamilneethi.vercel.app/
-              </a>
             </div>
 
             {/* Bullet points */}
