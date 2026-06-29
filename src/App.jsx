@@ -154,102 +154,11 @@ export default function App() {
         </div>
       </header>
 
-      {/* INVITATION BOX — Koviloor Madalayam Letterhead */}
-      <div style={{ background:'#FAF6ED', padding:'32px 24px 40px' }}>
-        <div style={{
-          maxWidth:780, margin:'0 auto',
-          border:'3px solid #8B6914',
-          borderRadius:8,
-          overflow:'hidden',
-          boxShadow:'0 4px 24px rgba(0,0,0,0.12)',
-          fontFamily:'Tiro Tamil, serif',
-        }}>
-
-          {/* ── LETTERHEAD ── */}
-          <div style={{ background:'#FFFBF0', borderBottom:'2px solid #8B6914', padding:'16px 24px' }}>
-            <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', flexWrap:'wrap', gap:12 }}>
-              {/* Left — Address */}
-              <div style={{ flex:1, minWidth:180 }}>
-                <div style={{ fontSize:20, fontWeight:700, color:'#7A1414', fontFamily:'Georgia, serif', lineHeight:1.3 }}>Koviloor Madalayam</div>
-                <div style={{ fontSize:14, fontWeight:700, color:'#B8860B', fontFamily:'Georgia, serif' }}>Koviloor – 630 307</div>
-                <div style={{ fontSize:12.5, color:'#3D3320', marginTop:4, lineHeight:1.6 }}>Madurai Road, Koviloor<br/>Sivagangai Dist</div>
-              </div>
-              {/* Centre — Nataraja + Sivamayam */}
-              <div style={{ display:'flex', flexDirection:'column', alignItems:'center', gap:4 }}>
-                <div style={{ fontSize:11, color:'#B8860B', letterSpacing:2, fontFamily:'Georgia, serif' }}>Sivamayam</div>
-                <img src={NATARAJA} alt="நடராஜர்" style={{ height:64, objectFit:'contain', filter:'drop-shadow(0 2px 6px rgba(0,0,0,0.3))' }} />
-              </div>
-              {/* Right — Contact + Swamigal */}
-              <div style={{ flex:1, minWidth:180, textAlign:'right' }}>
-                <div style={{ fontSize:12.5, color:'#3D3320', lineHeight:1.8 }}>
-                  <div>📞 97893 36720, 94433 35312</div>
-                  <div>✉ slnaiyar@gmail.com</div>
-                </div>
-                <div style={{ marginTop:8, fontSize:13, color:'#7A1414', lineHeight:1.5, fontStyle:'italic' }}>
-                  Sri La Sri<br/>
-                  <strong>Narayana Gnana Desiga Swamigal</strong><br/>
-                  <span style={{ fontSize:11, color:'#6B5C40' }}>Madathipathy</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* ── GOLD DIVIDER ── */}
-          <div style={{ height:4, background:'linear-gradient(90deg, #8B6914, #D4A017, #8B6914)' }} />
-
-          {/* ── BODY ── */}
-          <div style={{ background:'#FFFDF7', padding:'28px 32px' }}>
-
-            {/* Greeting */}
-            <div style={{ fontSize:22, color:'#7A1414', marginBottom:20, fontWeight:400 }}>
-              அன்புடையீர், வணக்கம்.
-            </div>
-
-            {/* Paragraphs */}
-            <div style={{ fontSize:15, color:'#2C1810', lineHeight:2, display:'flex', flexDirection:'column', gap:14 }}>
-              <p style={{margin:0}}>இன்றைய பள்ளிக் கல்வியில், சிறுவர்களின் உள்ளத்தில் அறநெறி விதைக்கும் பாடங்கள் பெருமளவில் மறைந்து வருகின்றன.</p>
-
-              <p style={{margin:0}}>ஒரு காலத்தில் <strong style={{color:'#7A1414'}}>ஆத்திச்சூடி, கொன்றைவேந்தன், ஆசாரக்கோவை, மூதுரை, நாலடியார்</strong> போன்ற அறநெறி நூல்கள் பள்ளிப் பாடங்களாக இருந்து, சிறுவயதிலிருந்தே ஒழுக்கம், பண்பு, அன்பு, இரக்கம், பெரியோர் மரியாதை போன்ற உயரிய பண்புகளை இயல்பாக வளர்த்தன.</p>
-
-              <p style={{margin:0}}>இன்று அந்த வாய்ப்பு குறைந்து வருவதால், அந்த அறநெறிச் செல்வங்களை மீண்டும் இளம் தலைமுறையிடம் கொண்டு சேர்க்க வேண்டும் என்பது நமது விருப்பமாக உள்ளது.</p>
-
-              <p style={{margin:0}}>அந்த எண்ணத்தின் அடிப்படையில், சிறுவர்கள் ஆர்வத்துடன் படிக்கும் வகையில், இந்த அறநெறி நூல்களை <strong style={{color:'#7A1414'}}>படக்கதை (Illustrated Story)</strong> வடிவில் வழங்கும் முயற்சியைத் தொடங்கியுள்ளோம்.</p>
-
-              <p style={{margin:0}}>இது ஒரு தொடர்ச்சியான பணி. தினந்தோறும் புதிய கதைகள் சேர்க்கப்படும். பின்னர் <strong style={{color:'#7A1414'}}>கொன்றைவேந்தன், ஆசாரக்கோவை, மூதுரை, நாலடியார்</strong> உள்ளிட்ட பல அறநெறி நூல்களும் இதே வடிவில் வெளியிடப்படும்.</p>
-            </div>
-
-            {/* Bullet points */}
-            <div style={{ display:'flex', flexDirection:'column', gap:14, marginBottom:24 }}>
-              {[
-                { icon:'👨‍👩‍👧‍👦', text:'தாங்கள் அறிந்துள்ள குழந்தைகள், மாணவர்கள், பெற்றோர், ஆசிரியர்கள் அனைவரிடமும் இந்த இணையதளத்தைப் பகிர்ந்து, அவர்கள் இந்தக் கதைகளை வாசிக்கும் வாய்ப்பை உருவாக்கித் தருமாறு அன்புடன் கேட்டுக்கொள்கிறோம்.' },
-                { icon:'🌱', text:'சிறுவயதில் மனதில் விதைக்கப்படும் ஒரு நல்ல எண்ணம், வாழ்நாள் முழுவதும் நல்ல மனிதனாக வாழ வழிகாட்டும்.' },
-                { icon:'📚', text:'"தொட்டில் பழக்கம் சுடுகாடு வரை" என்பார்கள். எனவே, சிறுவயதிலேயே அறநெறி விதைகளை விதைப்பது, எதிர்கால நல்ல சமுதாயத்தை உருவாக்கும் மிகச் சிறந்த முதலீடாகும்.' },
-                { icon:'🙏', text:'இந்த அறப்பணிக்கு தங்களின் அன்பான ஆதரவையும், ஒத்துழைப்பையும் மனமார வேண்டுகிறோம்.' },
-              ].map((item, i) => (
-                <div key={i} style={{ display:'flex', gap:14, alignItems:'flex-start' }}>
-                  <div style={{ width:36, height:36, borderRadius:'50%', background:'#F5E8E8', display:'flex', alignItems:'center', justifyContent:'center', fontSize:18, flexShrink:0 }}>{item.icon}</div>
-                  <div style={{ fontSize:14, color:'#2C1810', lineHeight:1.85, paddingTop:4 }}>{item.text}</div>
-                </div>
-              ))}
-            </div>
-
-          </div>
-
-          {/* ── FOOTER ── */}
-          <div style={{ background:'#7A1414', padding:'14px 24px', display:'flex', alignItems:'center', justifyContent:'center', gap:12 }}>
-            <span style={{ fontSize:18 }}>🪷</span>
-            <span style={{ fontFamily:'Tiro Tamil, serif', fontSize:17, color:'#FFE8A0', letterSpacing:1 }}>வேணும் சற்குருநாதன் துணை.</span>
-            <span style={{ fontSize:18 }}>🪷</span>
-          </div>
-
-        </div>
-      </div>
-      {/* BODY — Sidebar + Content */}
-      <div style={{ display:'flex' }}>
+      {/* BODY: Sidebar + Scrollable Content */}
+      <div style={{ display:'flex', height:'calc(100vh - 0px)' }}>
 
         {/* ── LEFT SIDEBAR ── */}
         <div style={{ width:210, flexShrink:0, background:'#fff', borderRight:'1px solid #D9CEBC', position:'sticky', top:0, height:'100vh', overflowY:'auto', display:'flex', flexDirection:'column' }}>
-
           {/* Search */}
           <div style={{ padding:'10px 10px 8px', borderBottom:'1px solid #D9CEBC' }}>
             <div style={{ position:'relative' }}>
@@ -258,17 +167,13 @@ export default function App() {
                 style={{ width:'100%', padding:'7px 8px 7px 26px', border:'1px solid #D9CEBC', borderRadius:6, fontSize:13, background:'#FAF6ED', color:'#1A1208', outline:'none', boxSizing:'border-box', fontFamily:'Inter' }} />
             </div>
           </div>
-
           {/* Nav */}
           <nav style={{ flex:1, padding:'6px 0' }}>
-            {/* Intro */}
             <button onClick={()=>{ setFilter('all'); setTimeout(()=>document.getElementById('intro-box')?.scrollIntoView({behavior:'smooth'}),50); }}
-              style={{ width:'100%', textAlign:'left', padding:'10px 14px', border:'none', background:'transparent', color:'#3D3320', fontSize:13, cursor:'pointer', fontFamily:'Tiro Tamil, serif', borderLeft:'3px solid transparent', display:'flex', alignItems:'center', gap:8 }}>
+              style={{ width:'100%', textAlign:'left', padding:'10px 14px', border:'none', background:filter==='all'?'#F5E8E8':'transparent', color:filter==='all'?'#7A1414':'#3D3320', fontSize:13, cursor:'pointer', fontFamily:'Tiro Tamil, serif', borderLeft:filter==='all'?'3px solid #7A1414':'3px solid transparent' }}>
               📜 அறிமுகம்
             </button>
-
             <div style={{ padding:'8px 14px 3px', fontSize:10, fontWeight:600, color:'#B8860B', letterSpacing:'.08em' }}>✦ ஔவையார்</div>
-
             {SOURCES.filter(s=>s.id!=='naladiyar').map(src => {
               const cnt = books.filter(b=>b.source===src.id && b.url).length;
               const total = books.filter(b=>b.source===src.id).length;
@@ -284,9 +189,7 @@ export default function App() {
                 </button>
               );
             })}
-
             <div style={{ padding:'8px 14px 3px', fontSize:10, fontWeight:600, color:'#B8860B', letterSpacing:'.08em' }}>✦ நாலடியார்</div>
-
             {SOURCES.filter(s=>s.id==='naladiyar').map(src => {
               const cnt = books.filter(b=>b.source===src.id && b.url).length;
               const total = books.filter(b=>b.source===src.id).length;
@@ -303,7 +206,6 @@ export default function App() {
               );
             })}
           </nav>
-
           {/* Manage links */}
           <div style={{ padding:10, borderTop:'1px solid #D9CEBC' }}>
             <button onClick={openAdmin} style={{ width:'100%', padding:'8px', background:'#7A1414', color:'#fff', border:'none', borderRadius:6, fontSize:12, cursor:'pointer', fontFamily:'Inter' }}>
@@ -312,14 +214,75 @@ export default function App() {
           </div>
         </div>
 
-        {/* ── MAIN CONTENT ── */}
-        <div style={{ flex:1, minWidth:0, overflowX:'hidden', padding:'0 0 64px' }}>
+        {/* ── SCROLLABLE CONTENT ── */}
+        <div style={{ flex:1, minWidth:0, overflowY:'auto', height:'100vh' }}>
 
-          {/* Intro box anchor */}
-          <div id="intro-box" />
+          {/* INVITATION */}
+          <div id="intro-box" style={{ background:'#FAF6ED', padding:'24px 20px 28px' }}>
+            <div style={{ maxWidth:680, margin:'0 auto', border:'3px solid #8B6914', borderRadius:8, overflow:'hidden', boxShadow:'0 4px 24px rgba(0,0,0,0.12)', fontFamily:'Tiro Tamil, serif' }}>
+              {/* Letterhead */}
+              <div style={{ background:'#FFFBF0', borderBottom:'2px solid #8B6914', padding:'14px 20px' }}>
+                <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', flexWrap:'wrap', gap:10 }}>
+                  <div style={{ flex:1, minWidth:140 }}>
+                    <div style={{ fontSize:17, fontWeight:700, color:'#7A1414', fontFamily:'Georgia, serif' }}>Koviloor Madalayam</div>
+                    <div style={{ fontSize:13, fontWeight:700, color:'#B8860B', fontFamily:'Georgia, serif' }}>Koviloor – 630 307</div>
+                    <div style={{ fontSize:11.5, color:'#3D3320', marginTop:3, lineHeight:1.6 }}>Madurai Road, Koviloor<br/>Sivagangai Dist</div>
+                  </div>
+                  <div style={{ display:'flex', flexDirection:'column', alignItems:'center', gap:3 }}>
+                    <div style={{ fontSize:10, color:'#B8860B', letterSpacing:2 }}>Sivamayam</div>
+                    <img src={NATARAJA} alt="நடராஜர்" style={{ height:52, objectFit:'contain', filter:'drop-shadow(0 2px 6px rgba(0,0,0,0.3))' }} />
+                  </div>
+                  <div style={{ flex:1, minWidth:140, textAlign:'right' }}>
+                    <div style={{ fontSize:11.5, color:'#3D3320', lineHeight:1.8 }}>
+                      <div>📞 97893 36720, 94433 35312</div>
+                      <div>✉ slnaiyar@gmail.com</div>
+                    </div>
+                    <div style={{ marginTop:6, fontSize:11.5, color:'#7A1414', lineHeight:1.5, fontStyle:'italic' }}>
+                      Sri La Sri<br/>
+                      <strong>Narayana Gnana Desiga Swamigal</strong><br/>
+                      <span style={{ fontSize:10, color:'#6B5C40' }}>Madathipathy</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {/* Gold bar */}
+              <div style={{ height:4, background:'linear-gradient(90deg,#8B6914,#D4A017,#8B6914)' }} />
+              {/* Body */}
+              <div style={{ background:'#FFFDF7', padding:'20px 24px' }}>
+                <div style={{ fontSize:19, color:'#7A1414', marginBottom:14 }}>அன்புடையீர், வணக்கம்.</div>
+                <div style={{ fontSize:14, color:'#2C1810', lineHeight:1.95, display:'flex', flexDirection:'column', gap:11 }}>
+                  <p style={{margin:0}}>இன்றைய பள்ளிக் கல்வியில், சிறுவர்களின் உள்ளத்தில் அறநெறி விதைக்கும் பாடங்கள் பெருமளவில் மறைந்து வருகின்றன.</p>
+                  <p style={{margin:0}}>ஒரு காலத்தில் <strong style={{color:'#7A1414'}}>ஆத்திச்சூடி, கொன்றைவேந்தன், ஆசாரக்கோவை, மூதுரை, நாலடியார்</strong> போன்ற அறநெறி நூல்கள் பள்ளிப் பாடங்களாக இருந்து, சிறுவயதிலிருந்தே ஒழுக்கம், பண்பு, அன்பு, இரக்கம், பெரியோர் மரியாதை போன்ற உயரிய பண்புகளை இயல்பாக வளர்த்தன.</p>
+                  <p style={{margin:0}}>இன்று அந்த வாய்ப்பு குறைந்து வருவதால், அந்த அறநெறிச் செல்வங்களை மீண்டும் இளம் தலைமுறையிடம் கொண்டு சேர்க்க வேண்டும் என்பது நமது விருப்பமாக உள்ளது.</p>
+                  <p style={{margin:0}}>அந்த எண்ணத்தின் அடிப்படையில், சிறுவர்கள் ஆர்வத்துடன் படிக்கும் வகையில், இந்த அறநெறி நூல்களை <strong style={{color:'#7A1414'}}>படக்கதை (Illustrated Story)</strong> வடிவில் வழங்கும் முயற்சியைத் தொடங்கியுள்ளோம்.</p>
+                  <p style={{margin:0}}>இது ஒரு தொடர்ச்சியான பணி. தினந்தோறும் புதிய கதைகள் சேர்க்கப்படும். பின்னர் <strong style={{color:'#7A1414'}}>கொன்றைவேந்தன், ஆசாரக்கோவை, மூதுரை, நாலடியார்</strong> உள்ளிட்ட பல அறநெறி நூல்களும் இதே வடிவில் வெளியிடப்படும்.</p>
+                </div>
+                <div style={{ display:'flex', flexDirection:'column', gap:11, marginTop:18 }}>
+                  {[
+                    {icon:'👨‍👩‍👧‍👦', text:'தாங்கள் அறிந்துள்ள குழந்தைகள், மாணவர்கள், பெற்றோர், ஆசிரியர்கள் அனைவரிடமும் இந்த இணையதளத்தைப் பகிர்ந்து, அவர்கள் இந்தக் கதைகளை வாசிக்கும் வாய்ப்பை உருவாக்கித் தருமாறு அன்புடன் கேட்டுக்கொள்கிறோம்.'},
+                    {icon:'🌱', text:'சிறுவயதில் மனதில் விதைக்கப்படும் ஒரு நல்ல எண்ணம், வாழ்நாள் முழுவதும் நல்ல மனிதனாக வாழ வழிகாட்டும்.'},
+                    {icon:'📚', text:'"தொட்டில் பழக்கம் சுடுகாடு வரை" என்பார்கள். எனவே, சிறுவயதிலேயே அறநெறி விதைகளை விதைப்பது, எதிர்கால நல்ல சமுதாயத்தை உருவாக்கும் மிகச் சிறந்த முதலீடாகும்.'},
+                    {icon:'🙏', text:'இந்த அறப்பணிக்கு தங்களின் அன்பான ஆதரவையும், ஒத்துழைப்பையும் மனமார வேண்டுகிறோம்.'},
+                  ].map((item,i) => (
+                    <div key={i} style={{ display:'flex', gap:11, alignItems:'flex-start' }}>
+                      <div style={{ width:30, height:30, borderRadius:'50%', background:'#F5E8E8', display:'flex', alignItems:'center', justifyContent:'center', fontSize:15, flexShrink:0 }}>{item.icon}</div>
+                      <div style={{ fontSize:13, color:'#2C1810', lineHeight:1.85, paddingTop:3 }}>{item.text}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              {/* Footer */}
+              <div style={{ background:'#7A1414', padding:'11px 20px', display:'flex', alignItems:'center', justifyContent:'center', gap:10 }}>
+                <span style={{ fontSize:15 }}>🪷</span>
+                <span style={{ fontFamily:'Tiro Tamil, serif', fontSize:15, color:'#FFE8A0' }}>வேணும் சற்குருநாதன் துணை.</span>
+                <span style={{ fontSize:15 }}>🪷</span>
+              </div>
+            </div>
+            <div style={{ textAlign:'center', marginTop:16, fontSize:13, color:'#6B5C40', fontFamily:'Tiro Tamil, serif' }}>↓ கீழே படக்கதைகளை காணலாம் ↓</div>
+          </div>
 
           {/* Book sections */}
-          <div style={{ padding:'16px 24px 64px' }}>
+          <div style={{ padding:'8px 20px 64px' }}>
             {SOURCES.map((src, idx) => {
               if (filter !== 'all' && filter !== src.id) return null;
               const srcBooks = books.filter(b => b.source===src.id);
@@ -331,15 +294,16 @@ export default function App() {
               );
             })}
           </div>
+
+          {/* Footer */}
+          <footer style={{ background:'#1A1208', color:'rgba(255,255,255,.5)', textAlign:'center', padding:24, fontSize:13, lineHeight:1.6 }}>
+            <div style={{ fontFamily:'Tiro Tamil, serif', color:'rgba(255,255,255,.7)', fontSize:15, marginBottom:4 }}>தமிழ் இலக்கியத்தின் நீதிகளை அடுத்த தலைமுறைக்கு கொண்டு செல்வோம்</div>
+            <div>Preserving the wisdom of Tamil literature for future generations</div>
+            <div style={{ marginTop:8, fontSize:11, opacity:.5 }}>Flipbooks powered by Heyzine</div>
+          </footer>
+
         </div>
       </div>
-
-      {/* FOOTER */}
-      <footer style={{ background:'#1A1208', color:'rgba(255,255,255,.5)', textAlign:'center', padding:24, fontSize:13, lineHeight:1.6 }}>
-        <div style={{ fontFamily:'Tiro Tamil, serif', color:'rgba(255,255,255,.7)', fontSize:15, marginBottom:4 }}>தமிழ் இலக்கியத்தின் நீதிகளை அடுத்த தலைமுறைக்கு கொண்டு செல்வோம்</div>
-        <div>Preserving the wisdom of Tamil literature for future generations</div>
-        <div style={{ marginTop:8, fontSize:11, opacity:.5 }}>Flipbooks powered by Heyzine</div>
-      </footer>
 
       {/* ADMIN MODAL */}
       {adminOpen && (
