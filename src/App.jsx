@@ -154,61 +154,111 @@ export default function App() {
         </div>
       </header>
 
-      {/* WELCOME STATEMENT */}
-      <div style={{ background:'linear-gradient(135deg, #FDF6E3 0%, #FAF0D7 100%)', borderBottom:'1px solid #E8D5A3' }}>
-        <div style={{ maxWidth:900, margin:'0 auto', padding:'48px 32px', textAlign:'center' }}>
+      {/* INVITATION BOX — Koviloor Madalayam Letterhead */}
+      <div style={{ background:'#FAF6ED', padding:'32px 24px 40px' }}>
+        <div style={{
+          maxWidth:780, margin:'0 auto',
+          border:'3px solid #8B6914',
+          borderRadius:8,
+          overflow:'hidden',
+          boxShadow:'0 4px 24px rgba(0,0,0,0.12)',
+          fontFamily:'Tiro Tamil, serif',
+        }}>
 
-          {/* Decorative top */}
-          <div style={{ color:'#B8860B', fontSize:22, letterSpacing:12, marginBottom:28, opacity:.7 }}>❖ ❖ ❖</div>
-
-          {/* Opening */}
-          <div style={{ fontFamily:'Tiro Tamil, serif', fontSize:'clamp(18px,2.5vw,24px)', color:'#7A1414', fontWeight:400, marginBottom:28, lineHeight:1.6 }}>
-            அன்புடையீர், வணக்கம்.
-          </div>
-
-          {/* Main paragraphs */}
-          <div style={{ fontFamily:'Tiro Tamil, serif', fontSize:'clamp(14px,1.8vw,17px)', color:'#2C1810', lineHeight:2, textAlign:'left', maxWidth:780, margin:'0 auto', display:'flex', flexDirection:'column', gap:20 }}>
-
-            <p>இன்றைய பள்ளிக் கல்வியில், சிறுவர்களின் உள்ளத்தில் அறநெறி விதைக்கும் பாடங்கள் பெருமளவில் மறைந்து வருகின்றன.</p>
-
-            <p>ஒரு காலத்தில் <strong style={{color:'#7A1414'}}>ஆத்திச்சூடி, கொன்றைவேந்தன், மூதுரை, நாலடியார்</strong> போன்ற அறநெறி நூல்கள் பள்ளிப் பாடங்களாக இருந்து, சிறுவயதிலிருந்தே ஒழுக்கம், பண்பு, அன்பு, இரக்கம், பெரியோர் மரியாதை போன்ற உயரிய பண்புகளை இயல்பாக வளர்த்தன.</p>
-
-            <p>இன்று அந்த வாய்ப்பு குறைந்து வருவதால், அந்த அறநெறிச் செல்வங்களை மீண்டும் இளம் தலைமுறையிடம் கொண்டு சேர்க்க வேண்டும் என்பது நமது விருப்பமாக உள்ளது.</p>
-
-            <p>அந்த எண்ணத்தின் அடிப்படையில், சிறுவர்கள் ஆர்வத்துடன் படிக்கும் வகையில், இந்த அறநெறி நூல்களை <strong style={{color:'#7A1414'}}>படக்கதை (Illustrated Story)</strong> வடிவில் வழங்கும் முயற்சியைத் தொடங்கியுள்ளோம். முதல் கட்டமாக <strong style={{color:'#7A1414'}}>ஆத்திச்சூடியின் பன்னிரண்டு பாடல்களுக்கு</strong> படக்கதைகளைத் தயாரித்து பதிவேற்றியுள்ளோம்.</p>
-
-            <p>இது ஒரு தொடர்ச்சியான பணி. தினந்தோறும் புதிய கதைகள் சேர்க்கப்படும். பின்னர் <strong style={{color:'#7A1414'}}>கொன்றைவேந்தன், மூதுரை, நாலடியார்</strong> உள்ளிட்ட பல அறநெறி நூல்களும் இதே வடிவில் வெளியிடப்படும்.</p>
-
-          </div>
-
-          {/* Quote */}
-          <div style={{ margin:'36px auto', maxWidth:600, background:'rgba(122,20,20,0.06)', border:'1px solid rgba(122,20,20,0.15)', borderLeft:'4px solid #7A1414', borderRadius:'0 8px 8px 0', padding:'18px 24px', textAlign:'left' }}>
-            <div style={{ fontFamily:'Tiro Tamil, serif', fontSize:'clamp(15px,2vw,18px)', color:'#7A1414', lineHeight:1.8, fontStyle:'italic' }}>
-              "தொட்டில் பழக்கம் சுடுகாடு வரை"
+          {/* ── LETTERHEAD ── */}
+          <div style={{ background:'#FFFBF0', borderBottom:'2px solid #8B6914', padding:'16px 24px' }}>
+            <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', flexWrap:'wrap', gap:12 }}>
+              {/* Left — Address */}
+              <div style={{ flex:1, minWidth:180 }}>
+                <div style={{ fontSize:20, fontWeight:700, color:'#7A1414', fontFamily:'Georgia, serif', lineHeight:1.3 }}>Koviloor Madalayam</div>
+                <div style={{ fontSize:14, fontWeight:700, color:'#B8860B', fontFamily:'Georgia, serif' }}>Koviloor – 630 307</div>
+                <div style={{ fontSize:12.5, color:'#3D3320', marginTop:4, lineHeight:1.6 }}>Madurai Road, Koviloor<br/>Sivagangai Dist</div>
+              </div>
+              {/* Centre — Nataraja + Sivamayam */}
+              <div style={{ display:'flex', flexDirection:'column', alignItems:'center', gap:4 }}>
+                <div style={{ fontSize:11, color:'#B8860B', letterSpacing:2, fontFamily:'Georgia, serif' }}>Sivamayam</div>
+                <img src={NATARAJA} alt="நடராஜர்" style={{ height:64, objectFit:'contain', filter:'drop-shadow(0 2px 6px rgba(0,0,0,0.3))' }} />
+              </div>
+              {/* Right — Contact + Swamigal */}
+              <div style={{ flex:1, minWidth:180, textAlign:'right' }}>
+                <div style={{ fontSize:12.5, color:'#3D3320', lineHeight:1.8 }}>
+                  <div>📞 97893 36720, 94433 35312</div>
+                  <div>✉ sinaiyar@gmail.com</div>
+                </div>
+                <div style={{ marginTop:8, fontSize:13, color:'#7A1414', lineHeight:1.5, fontStyle:'italic' }}>
+                  Sri La Sri<br/>
+                  <strong>Narayana Gnana Desiga Swamigal</strong><br/>
+                  <span style={{ fontSize:11, color:'#6B5C40' }}>Madathipathy</span>
+                </div>
+              </div>
             </div>
-            <div style={{ fontFamily:'Tiro Tamil, serif', fontSize:13, color:'#6B5C40', marginTop:8, lineHeight:1.6 }}>
-              சிறுவயதிலேயே அறநெறி விதைகளை விதைப்பது, எதிர்கால நல்ல சமுதாயத்தை உருவாக்கும் மிகச் சிறந்த முதலீடாகும்.
+          </div>
+
+          {/* ── GOLD DIVIDER ── */}
+          <div style={{ height:4, background:'linear-gradient(90deg, #8B6914, #D4A017, #8B6914)' }} />
+
+          {/* ── BODY ── */}
+          <div style={{ background:'#FFFDF7', padding:'28px 32px' }}>
+
+            {/* Date */}
+            <div style={{ textAlign:'right', fontSize:12, color:'#6B5C40', marginBottom:16, fontFamily:'Georgia, serif' }}>
+              29 June 2026
             </div>
+
+            {/* Greeting */}
+            <div style={{ fontSize:22, color:'#7A1414', marginBottom:20, fontWeight:400 }}>
+              அன்புடையீர், வணக்கம்.
+            </div>
+
+            {/* Paragraphs */}
+            <div style={{ fontSize:15, color:'#2C1810', lineHeight:2, display:'flex', flexDirection:'column', gap:14 }}>
+              <p style={{margin:0}}>இன்றைய பள்ளிக் கல்வியில், சிறுவர்களின் உள்ளத்தில் அறநெறி விதைக்கும் பாடங்கள் பெருமளவில் மறைந்து வருகின்றன.</p>
+
+              <p style={{margin:0}}>ஒரு காலத்தில் <strong style={{color:'#7A1414'}}>ஆத்திச்சூடி, கொன்றைவேந்தன், ஆசாரக்கோவை, மூதுரை, நாலடியார்</strong> போன்ற அறநெறி நூல்கள் பள்ளிப் பாடங்களாக இருந்து, சிறுவயதிலிருந்தே ஒழுக்கம், பண்பு, அன்பு, இரக்கம், பெரியோர் மரியாதை போன்ற உயரிய பண்புகளை இயல்பாக வளர்த்தன.</p>
+
+              <p style={{margin:0}}>இன்று அந்த வாய்ப்பு குறைந்து வருவதால், அந்த அறநெறிச் செல்வங்களை மீண்டும் இளம் தலைமுறையிடம் கொண்டு சேர்க்க வேண்டும் என்பது நமது விருப்பமாக உள்ளது.</p>
+
+              <p style={{margin:0}}>அந்த எண்ணத்தின் அடிப்படையில், சிறுவர்கள் ஆர்வத்துடன் படிக்கும் வகையில், இந்த அறநெறி நூல்களை <strong style={{color:'#7A1414'}}>படக்கதை (Illustrated Story)</strong> வடிவில் வழங்கும் முயற்சியைத் தொடங்கியுள்ளோம்.</p>
+
+              <p style={{margin:0}}>இது ஒரு தொடர்ச்சியான பணி. தினந்தோறும் புதிய கதைகள் சேர்க்கப்படும். பின்னர் <strong style={{color:'#7A1414'}}>கொன்றைவேந்தன், ஆசாரக்கோவை, மூதுரை, நாலடியார்</strong> உள்ளிட்ட பல அறநெறி நூல்களும் இதே வடிவில் வெளியிடப்படும்.</p>
+            </div>
+
+            {/* CTA box */}
+            <div style={{ margin:'24px 0', background:'#7A1414', borderRadius:6, padding:'12px 20px', display:'flex', alignItems:'center', gap:12 }}>
+              <span style={{ fontSize:20 }}>📖</span>
+              <span style={{ fontSize:15, color:'#FFE8A0', fontFamily:'Tiro Tamil, serif' }}>இந்த அறநெறிக் கதைகளைப் படிக்க</span>
+            </div>
+
+            {/* URL box */}
+            <div style={{ background:'#FFF9E6', border:'2px solid #B8860B', borderRadius:6, padding:'12px 20px', textAlign:'center', marginBottom:24 }}>
+              <a href="https://tamilneethi.vercel.app/" target="_blank" rel="noopener"
+                style={{ fontSize:17, color:'#0066CC', fontFamily:'Georgia, serif', fontWeight:700, textDecoration:'underline' }}>
+                https://tamilneethi.vercel.app/
+              </a>
+            </div>
+
+            {/* Bullet points */}
+            <div style={{ display:'flex', flexDirection:'column', gap:14, marginBottom:24 }}>
+              {[
+                { icon:'👨‍👩‍👧‍👦', text:'தாங்கள் அறிந்துள்ள குழந்தைகள், மாணவர்கள், பெற்றோர், ஆசிரியர்கள் அனைவரிடமும் இந்த இணையதளத்தைப் பகிர்ந்து, அவர்கள் இந்தக் கதைகளை வாசிக்கும் வாய்ப்பை உருவாக்கித் தருமாறு அன்புடன் கேட்டுக்கொள்கிறோம்.' },
+                { icon:'🌱', text:'சிறுவயதில் மனதில் விதைக்கப்படும் ஒரு நல்ல எண்ணம், வாழ்நாள் முழுவதும் நல்ல மனிதனாக வாழ வழிகாட்டும்.' },
+                { icon:'📚', text:'"தொட்டில் பழக்கம் சுடுகாடு வரை" என்பார்கள். எனவே, சிறுவயதிலேயே அறநெறி விதைகளை விதைப்பது, எதிர்கால நல்ல சமுதாயத்தை உருவாக்கும் மிகச் சிறந்த முதலீடாகும்.' },
+                { icon:'🙏', text:'இந்த அறப்பணிக்கு தங்களின் அன்பான ஆதரவையும், ஒத்துழைப்பையும் மனமார வேண்டுகிறோம்.' },
+              ].map((item, i) => (
+                <div key={i} style={{ display:'flex', gap:14, alignItems:'flex-start' }}>
+                  <div style={{ width:36, height:36, borderRadius:'50%', background:'#F5E8E8', display:'flex', alignItems:'center', justifyContent:'center', fontSize:18, flexShrink:0 }}>{item.icon}</div>
+                  <div style={{ fontSize:14, color:'#2C1810', lineHeight:1.85, paddingTop:4 }}>{item.text}</div>
+                </div>
+              ))}
+            </div>
+
           </div>
 
-          {/* Call to action */}
-          <div style={{ fontFamily:'Tiro Tamil, serif', fontSize:'clamp(13px,1.6vw,15px)', color:'#4A3520', lineHeight:1.9, maxWidth:720, margin:'0 auto 28px' }}>
-            தாங்கள் அறிந்துள்ள குழந்தைகள், மாணவர்கள், பெற்றோர், ஆசிரியர்கள் அனைவரிடமும் இந்த இணையதளத்தைப் பகிர்ந்து, அவர்கள் இந்தக் கதைகளை வாசிக்கும் வாய்ப்பை உருவாக்கித் தருமாறு அன்புடன் கேட்டுக்கொள்கிறோம்.
-          </div>
-
-          {/* Signature */}
-          <div style={{ fontFamily:'Tiro Tamil, serif', fontSize:15, color:'#7A1414', marginTop:8 }}>
-            வேணும் சற்குருநாதன் துணை.
-          </div>
-
-          {/* Decorative bottom */}
-          <div style={{ color:'#B8860B', fontSize:22, letterSpacing:12, marginTop:28, opacity:.7 }}>❖ ❖ ❖</div>
-
-          {/* Scroll down hint */}
-          <div style={{ marginTop:20, fontSize:13, color:'#6B5C40', display:'flex', alignItems:'center', justifyContent:'center', gap:6 }}>
-            <span>↓</span>
-            <span style={{ fontFamily:'Tiro Tamil, serif' }}>கீழே படக்கதைகளை காணலாம்</span>
-            <span>↓</span>
+          {/* ── FOOTER ── */}
+          <div style={{ background:'#7A1414', padding:'14px 24px', display:'flex', alignItems:'center', justifyContent:'center', gap:12 }}>
+            <span style={{ fontSize:18 }}>🪷</span>
+            <span style={{ fontFamily:'Tiro Tamil, serif', fontSize:17, color:'#FFE8A0', letterSpacing:1 }}>வேணும் சற்குருநாதன் துணை.</span>
+            <span style={{ fontSize:18 }}>🪷</span>
           </div>
 
         </div>
