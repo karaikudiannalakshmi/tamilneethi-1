@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { db } from './firebase';
 import { collection, getDocs, doc, setDoc } from 'firebase/firestore';
 import { AC_VERSES, KV_VERSES, MU_VERSES, NAL_VERSES } from './data';
+import { NATARAJA } from './nataraja';
 
 // ── Sources config ──
 const SOURCES = [
@@ -142,37 +143,52 @@ export default function App() {
       <header style={{ background:'#7A1414', color:'#fff', position:'relative', overflow:'hidden' }}>
         <div style={{ position:'absolute', inset:0, backgroundImage:'repeating-linear-gradient(90deg,rgba(255,255,255,.04) 0,rgba(255,255,255,.04) 1px,transparent 1px,transparent 40px),repeating-linear-gradient(0deg,rgba(255,255,255,.04) 0,rgba(255,255,255,.04) 1px,transparent 1px,transparent 40px)', pointerEvents:'none' }} />
         <div style={{ position:'relative', maxWidth:1100, margin:'0 auto', padding:'40px 24px 32px', display:'flex', alignItems:'center', justifyContent:'center', gap:24, flexWrap:'wrap', textAlign:'center' }}>
-          <img src="/nataraja.png" alt="நடராஜர்" style={{ height:80, objectFit:'contain', filter:'drop-shadow(0 2px 8px rgba(0,0,0,0.5))' }} onError={e => e.target.style.display='none'} />
+          <img src={NATARAJA} alt="நடராஜர்" style={{ height:80, objectFit:'contain', filter:'drop-shadow(0 2px 8px rgba(0,0,0,0.5))' }} />
           <div>
             <div style={{ fontFamily:'Tiro Tamil, serif', fontSize:'clamp(12px,2vw,14px)', color:'rgba(255,220,100,.9)', letterSpacing:'0.06em', marginBottom:6 }}>கோவிலூர் மடாலயம் வழங்கும்</div>
             <div style={{ fontFamily:'Tiro Tamil, serif', fontSize:'clamp(22px,4vw,34px)', color:'#FFE8A0', lineHeight:1.3 }}>தமிழ் நீதிக்கதைகள் நூலகம்</div>
             <div style={{ fontFamily:'Lora, serif', fontSize:'clamp(13px,2vw,17px)', fontStyle:'italic', color:'rgba(255,255,255,.7)', marginTop:6 }}>Tamil Moral Stories — A Digital Flipbook Library</div>
             <div style={{ margin:'14px auto 0', color:'#B8860B', fontSize:18, letterSpacing:8, opacity:.8 }}>❖ ❖ ❖</div>
           </div>
-          <img src="/nataraja.png" alt="" aria-hidden style={{ height:80, objectFit:'contain', filter:'drop-shadow(0 2px 8px rgba(0,0,0,0.5))', transform:'scaleX(-1)' }} onError={e => e.target.style.display='none'} />
+          <img src={NATARAJA} alt="" aria-hidden style={{ height:80, objectFit:'contain', filter:'drop-shadow(0 2px 8px rgba(0,0,0,0.5))', transform:'scaleX(-1)' }} />
         </div>
       </header>
 
       {/* TOOLBAR */}
       <div style={{ background:'#fff', borderBottom:'1px solid #D9CEBC', position:'sticky', top:0, zIndex:100 }}>
-        <div style={{ maxWidth:1100, margin:'0 auto', padding:'10px 24px', display:'flex', alignItems:'center', gap:12, flexWrap:'wrap' }}>
-          <div style={{ position:'relative', flex:1, minWidth:180 }}>
+        <div style={{ maxWidth:1100, margin:'0 auto', padding:'10px 24px', display:'flex', flexDirection:'column', gap:8 }}>
+          {/* Row 1 — Search */}
+          <div style={{ position:'relative' }}>
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#6B5C40" strokeWidth="2" style={{ position:'absolute', left:10, top:'50%', transform:'translateY(-50%)' }}><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-            <input value={query} onChange={e=>setQuery(e.target.value)} placeholder="தேடுங்கள் / Search…" style={{ width:'100%', padding:'8px 12px 8px 34px', border:'1px solid #D9CEBC', borderRadius:8, fontSize:14, background:'#FAF6ED', color:'#1A1208', outline:'none', fontFamily:'Inter' }} />
+            <input value={query} onChange={e=>setQuery(e.target.value)} placeholder="தேடுங்கள் / Search…" style={{ width:'100%', padding:'8px 12px 8px 34px', border:'1px solid #D9CEBC', borderRadius:8, fontSize:14, background:'#FAF6ED', color:'#1A1208', outline:'none', fontFamily:'Inter', boxSizing:'border-box' }} />
           </div>
+          {/* Row 2 — Filter buttons */}
           <div style={{ display:'flex', gap:6, flexWrap:'wrap', alignItems:'center' }}>
-            <span style={{ fontSize:10, color:'#6B5C40', padding:'0 4px' }}>✦ ஔவையார்:</span>
-            {SOURCES.map(src => {
+            <button onClick={()=>setFilter('all')}
+              style={{ padding:'5px 14px', borderRadius:20, border:`1px solid ${filter==='all'?'#7A1414':'#D9CEBC'}`, background:filter==='all'?'#7A1414':'transparent', color:filter==='all'?'#fff':'#3D3320', fontSize:12, cursor:'pointer', whiteSpace:'nowrap' }}>
+              அனைத்தும் / All
+            </button>
+            <span style={{ fontSize:10, color:'#6B5C40', padding:'0 2px' }}>✦ ஔவையார்:</span>
+            {SOURCES.filter(s => s.id !== 'naladiyar').map(src => {
               const cnt = books.filter(b => b.source===src.id && matchQ(b,query)).length;
               const active = filter===src.id;
               return (
                 <button key={src.id} onClick={()=>setFilter(filter===src.id?'all':src.id)}
-                  style={{ padding:'6px 14px', borderRadius:20, border:`1px solid ${active?'#7A1414':'#D9CEBC'}`, background:active?'#7A1414':'transparent', color:active?'#fff':'#3D3320', fontSize:13, cursor:'pointer', whiteSpace:'nowrap', display:'flex', alignItems:'center', gap:4 }}>
+                  style={{ padding:'5px 12px', borderRadius:20, border:`1px solid ${active?'#7A1414':'#D9CEBC'}`, background:active?'#7A1414':'transparent', color:active?'#fff':'#3D3320', fontSize:12, cursor:'pointer', whiteSpace:'nowrap', display:'flex', alignItems:'center', gap:4 }}>
                   {src.icon} {src.ta} <span style={{ background:active?'rgba(255,255,255,.25)':'#F5E8E8', color:active?'#fff':'#7A1414', fontSize:11, fontWeight:600, padding:'1px 6px', borderRadius:10 }}>{cnt}</span>
                 </button>
               );
-              if (src.id==='muthurai') return [btn, <span key="sep" style={{ fontSize:10, color:'#6B5C40', padding:'0 4px' }}>✦ நாலடியார்:</span>];
-              return btn;
+            })}
+            <span style={{ fontSize:10, color:'#6B5C40', padding:'0 2px' }}>✦ நாலடியார்:</span>
+            {SOURCES.filter(s => s.id === 'naladiyar').map(src => {
+              const cnt = books.filter(b => b.source===src.id && matchQ(b,query)).length;
+              const active = filter===src.id;
+              return (
+                <button key={src.id} onClick={()=>setFilter(filter===src.id?'all':src.id)}
+                  style={{ padding:'5px 12px', borderRadius:20, border:`1px solid ${active?'#7A1414':'#D9CEBC'}`, background:active?'#7A1414':'transparent', color:active?'#fff':'#3D3320', fontSize:12, cursor:'pointer', whiteSpace:'nowrap', display:'flex', alignItems:'center', gap:4 }}>
+                  {src.icon} {src.ta} <span style={{ background:active?'rgba(255,255,255,.25)':'#F5E8E8', color:active?'#fff':'#7A1414', fontSize:11, fontWeight:600, padding:'1px 6px', borderRadius:10 }}>{cnt}</span>
+                </button>
+              );
             })}
           </div>
         </div>
