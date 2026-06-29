@@ -174,8 +174,29 @@ footer .fta{font-family:'Tiro Tamil',serif;color:rgba(255,255,255,.7);font-size:
   <div class="fta">தமிழ் இலக்கியத்தின் நீதிகளை அடுத்த தலைமுறைக்கு கொண்டு செல்வோம்</div>
   <div>Preserving the wisdom of Tamil literature for future generations</div>
   <div style="margin-top:8px;font-size:11px;opacity:.5">Flipbooks powered by Heyzine</div>
-  <div style="margin-top:6px;font-size:11px;opacity:.3"><a href="#" onclick="toggleAdmin()" style="color:inherit;text-decoration:none">⚙</a></div>
+  <div style="margin-top:14px">
+    <button onclick="openLinkManager()" style="background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.2);padding:8px 20px;border-radius:6px;font-size:13px;cursor:pointer;font-family:'Inter',sans-serif;">🔗 இணைப்புகளை நிர்வகி / Manage Flipbook Links</button>
+  </div>
 </footer>
+
+<!-- LINK MANAGER MODAL -->
+<div class="moverlay" id="linkModal">
+  <div class="modal" style="max-width:600px;">
+    <button class="mclose" onclick="closeLinkModal()">✕</button>
+    <div class="mtitle">🔗 Flipbook இணைப்புகளை சேர்க்கவும் / Add Flipbook Links</div>
+    <div style="margin-bottom:16px;">
+      <label style="display:block;font-size:13px;font-weight:500;color:var(--ink-soft);margin-bottom:8px;">நூல் தேர்வு / Select Work</label>
+      <select id="lm_src" onchange="loadLinkList()" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:7px;font-size:14px;font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);outline:none;">
+        <option value="">— தேர்வு செய்யுங்கள் —</option>
+      </select>
+    </div>
+    <div id="lm_list" style="max-height:400px;overflow-y:auto;border:1px solid var(--border);border-radius:8px;"></div>
+    <div style="margin-top:16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
+      <button onclick="exportData()" style="padding:8px 16px;border:1px solid var(--gold);border-radius:6px;background:var(--gold-light);color:var(--gold);font-size:13px;cursor:pointer;font-family:'Inter',sans-serif;">⤓ Export all links (JSON)</button>
+      <button onclick="closeLinkModal()" style="padding:8px 20px;border:none;border-radius:6px;background:var(--red);color:#fff;font-size:13px;cursor:pointer;font-family:'Inter',sans-serif;">Done ✓</button>
+    </div>
+  </div>
+</div>
 
 <!-- ADD MODAL -->
 <div class="moverlay" id="addModal">
@@ -927,22 +948,103 @@ function exportData() {
 }
 
 // ══════════════════════════════════════════════════════════════════
-// ADMIN (click ⚙ 3x)
+// LINK MANAGER — simple panel to paste Heyzine URLs
 // ══════════════════════════════════════════════════════════════════
-function toggleAdmin() {
-  adminClicks++;
-  clearTimeout(adminTimer);
-  adminTimer = setTimeout(() => { adminClicks = 0; }, 2000);
-  if (adminClicks >= 3) {
-    adminClicks = 0;
-    const pwd = prompt('Admin password:');
-    if (pwd === 'koviloor2025') {
-      adminMode = !adminMode;
-      document.getElementById('adminBar').style.display = adminMode ? 'block' : 'none';
-      renderAll();
+const ADMIN_PASSWORD = 'Koviloor@07';
+let adminUnlocked = false;
+
+function openLinkManager() {
+  if (!adminUnlocked) {
+    const pwd = prompt('கடவுச்சொல் / Password:');
+    if (pwd !== ADMIN_PASSWORD) {
+      alert('தவறான கடவுச்சொல் / Incorrect password.');
+      return;
     }
+    adminUnlocked = true;
   }
+  const sel = document.getElementById('lm_src');
+  sel.innerHTML = '<option value="">— தேர்வு செய்யுங்கள் —</option>';
+  SOURCES.forEach(s => {
+    sel.innerHTML += `<option value="${s.id}">${s.icon} ${s.ta} — ${s.en}</option>`;
+  });
+  sel.value = SOURCES[0].id;
+  loadLinkList();
+  document.getElementById('linkModal').classList.add('open');
 }
+
+function closeLinkModal() {
+  document.getElementById('linkModal').classList.remove('open');
+  adminUnlocked = false;  // lock again on close
+  renderAll();
+}
+
+function loadLinkList() {
+  const srcId = document.getElementById('lm_src').value;
+  const list = document.getElementById('lm_list');
+  if (!srcId) { list.innerHTML = ''; return; }
+
+  const srcBooks = BOOKS.filter(b => b.source === srcId);
+  const src = SOURCES.find(s => s.id === srcId);
+
+  list.innerHTML = '';
+
+  src.subs.forEach(sub => {
+    const subBooks = srcBooks.filter(b => b.sub === sub.id);
+    if (!subBooks.length) return;
+
+    // Sub-header
+    const hdr = document.createElement('div');
+    hdr.style.cssText = 'background:var(--gold-light);padding:8px 14px;font-size:12px;font-weight:600;color:var(--gold);border-bottom:1px solid #E8D080;font-family:Inter,sans-serif;letter-spacing:.04em;';
+    hdr.textContent = sub.ta + ' — ' + sub.en;
+    list.appendChild(hdr);
+
+    subBooks.forEach(book => {
+      const row = document.createElement('div');
+      row.style.cssText = 'display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--border);';
+
+      const hasLink = book.url && book.url.trim() !== '';
+
+      row.innerHTML = `
+        <div style="flex:0 0 28px;width:28px;height:28px;border-radius:50%;background:${hasLink ? '#E8F5E9' : 'var(--red-light)'};display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:${hasLink ? '#2E7D32' : 'var(--red)'};">
+          ${hasLink ? '✓' : book.num}
+        </div>
+        <div style="flex:1;min-width:0;">
+          <div style="font-family:'Tiro Tamil',serif;font-size:13px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${book.num}. ${book.ta}</div>
+          <div style="font-size:11px;color:var(--ink-muted);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${hasLink ? book.url : 'இணைப்பு இல்லை — No link yet'}</div>
+        </div>
+        <input type="url" placeholder="https://heyzine.com/flip-book/…"
+          value="${book.url || ''}"
+          data-id="${book.id}"
+          onchange="saveUrlFromInput(this)"
+          style="width:220px;padding:6px 10px;border:1px solid var(--border);border-radius:6px;font-size:12px;font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);outline:none;flex-shrink:0;">
+      `;
+      list.appendChild(row);
+    });
+  });
+}
+
+function saveUrlFromInput(input) {
+  const bookId = input.dataset.id;
+  const book = BOOKS.find(b => b.id === bookId);
+  if (!book) return;
+  book.url = input.value.trim();
+  localStorage.setItem('tsl_books_v2', JSON.stringify(BOOKS));
+  // Refresh the row indicator
+  const indicator = input.closest('div[style]').querySelector('div[style*="border-radius:50%"]');
+  if (indicator) {
+    const hasLink = book.url !== '';
+    indicator.style.background = hasLink ? '#E8F5E9' : 'var(--red-light)';
+    indicator.style.color = hasLink ? '#2E7D32' : 'var(--red)';
+    indicator.textContent = hasLink ? '✓' : book.num;
+  }
+  const urlPreview = input.closest('div[style]').querySelector('div[style*="font-size:11px"]');
+  if (urlPreview) urlPreview.textContent = book.url || 'இணைப்பு இல்லை — No link yet';
+}
+
+// ══════════════════════════════════════════════════════════════════
+// ADMIN (kept for export only — no longer needed for links)
+// ══════════════════════════════════════════════════════════════════
+function toggleAdmin() {}
 
 // ══════════════════════════════════════════════════════════════════
 // INIT
