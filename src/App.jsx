@@ -218,12 +218,6 @@ export default function App() {
               <p style={{margin:0}}>இது ஒரு தொடர்ச்சியான பணி. தினந்தோறும் புதிய கதைகள் சேர்க்கப்படும். பின்னர் <strong style={{color:'#7A1414'}}>கொன்றைவேந்தன், ஆசாரக்கோவை, மூதுரை, நாலடியார்</strong> உள்ளிட்ட பல அறநெறி நூல்களும் இதே வடிவில் வெளியிடப்படும்.</p>
             </div>
 
-            {/* CTA box */}
-            <div style={{ margin:'24px 0', background:'#7A1414', borderRadius:6, padding:'12px 20px', display:'flex', alignItems:'center', gap:12 }}>
-              <span style={{ fontSize:20 }}>📖</span>
-              <span style={{ fontSize:15, color:'#FFE8A0', fontFamily:'Tiro Tamil, serif' }}>இந்த அறநெறிக் கதைகளைப் படிக்க</span>
-            </div>
-
             {/* Bullet points */}
             <div style={{ display:'flex', flexDirection:'column', gap:14, marginBottom:24 }}>
               {[
