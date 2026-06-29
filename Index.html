@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="ta-IN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tamil Moral Stories — நீதிக்கதைகள் நூலகம்</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Tamil:ital@0;1&family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --red:#7A1414; --red-light:#F5E8E8; --red-mid:#C0392B;
+  --gold:#B8860B; --gold-light:#FDF6DC; --gold-mid:#D4A017;
+  --cream:#FAF6ED; --ink:#1A1208; --ink-soft:#3D3320; --ink-muted:#6B5C40;
+  --border:#D9CEBC; --border-strong:#B8A98A;
+  --white:#FFFFFF; --card-bg:#FFFDF7; --tag-bg:#EDE5D5; --tag-text:#4A3520;
+  --shadow:rgba(26,18,8,0.08);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);min-height:100vh;line-height:1.6;}
+
+/* HEADER */
+header{background:var(--red);color:var(--white);position:relative;overflow:hidden;}
+.hpat{position:absolute;inset:0;background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.04) 0,rgba(255,255,255,.04) 1px,transparent 1px,transparent 40px),repeating-linear-gradient(0deg,rgba(255,255,255,.04) 0,rgba(255,255,255,.04) 1px,transparent 1px,transparent 40px);pointer-events:none;}
+.hinner{position:relative;max-width:1100px;margin:0 auto;padding:48px 24px 40px;display:flex;flex-direction:column;align-items:center;text-align:center;}
+.lamp{font-size:36px;margin-bottom:12px;}
+.title-ta{font-family:'Tiro Tamil',serif;font-size:clamp(22px,4vw,34px);color:#FFE8A0;line-height:1.3;}
+.title-en{font-family:'Lora',serif;font-size:clamp(13px,2vw,17px);font-style:italic;color:rgba(255,255,255,.7);margin-top:6px;}
+.orn{margin:16px auto 0;color:#B8860B;font-size:18px;letter-spacing:8px;opacity:.8;}
+
+/* TOOLBAR */
+.toolbar{background:var(--white);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;}
+.tbinner{max-width:1100px;margin:0 auto;padding:10px 24px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.swrap{position:relative;flex:1;min-width:180px;}
+.swrap svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--ink-muted);pointer-events:none;}
+#si{width:100%;padding:8px 12px 8px 34px;border:1px solid var(--border);border-radius:8px;font-size:14px;font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);outline:none;transition:border-color .2s;}
+#si:focus{border-color:var(--red);}
+#si::placeholder{color:var(--ink-muted);}
+.fbtns{display:flex;gap:6px;flex-wrap:wrap;align-items:center;}
+.fb{padding:6px 14px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--ink-soft);font-size:13px;font-family:'Inter',sans-serif;cursor:pointer;transition:all .18s;white-space:nowrap;}
+.fb:hover{border-color:var(--red-mid);color:var(--red);}
+.fb.active{background:var(--red);color:#fff;border-color:var(--red);}
+.cbadge{background:var(--red-light);color:var(--red);font-size:11px;font-weight:600;padding:1px 6px;border-radius:10px;margin-left:4px;}
+.fgrp-lbl{font-size:10px;color:var(--ink-muted);padding:0 4px;letter-spacing:.05em;white-space:nowrap;align-self:center;}
+
+/* ADMIN BAR */
+.adminbar{background:var(--gold-light);border-bottom:1px solid #E0C850;padding:8px 24px;}
+.abinner{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.abinner span{font-size:13px;color:var(--gold);font-weight:500;}
+.btn-add{padding:6px 16px;border-radius:6px;background:var(--red);color:#fff;border:none;font-size:13px;font-weight:500;cursor:pointer;font-family:'Inter',sans-serif;}
+.btn-add:hover{background:var(--red-mid);}
+
+/* MAIN */
+main{max-width:1100px;margin:0 auto;padding:32px 24px 64px;}
+
+/* SECTION */
+.lsec{margin-bottom:52px;}
+.lsec.hidden{display:none;}
+.sechdr{display:flex;align-items:flex-start;gap:16px;margin-bottom:20px;padding-bottom:14px;border-bottom:2px solid var(--red);}
+.secnum{background:var(--red);color:#fff;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;flex-shrink:0;margin-top:2px;}
+.sectitles{flex:1;}
+.stta{font-family:'Tiro Tamil',serif;font-size:22px;color:var(--red);line-height:1.3;}
+.sten{font-family:'Lora',serif;font-size:13px;font-style:italic;color:var(--ink-muted);margin-top:3px;}
+.sdesc{font-size:12.5px;color:var(--ink-muted);margin-top:5px;line-height:1.55;max-width:640px;}
+.stog{background:none;border:1px solid var(--border);color:var(--ink-muted);width:28px;height:28px;border-radius:6px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .18s;margin-top:4px;}
+.stog:hover{border-color:var(--red);color:var(--red);}
+
+/* SUBSECTION */
+.subsec{margin-bottom:28px;}
+.subhdr{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.sublbl{font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--gold);background:var(--gold-light);padding:3px 10px;border-radius:4px;border:1px solid #E8D080;white-space:nowrap;}
+.sublbl-ta{font-family:'Tiro Tamil',serif;font-size:14px;color:var(--ink-soft);letter-spacing:0;text-transform:none;}
+.subrule{flex:1;height:1px;background:var(--border);}
+.subcount{font-size:12px;color:var(--ink-muted);white-space:nowrap;}
+
+/* GRID */
+.bgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px;}
+
+/* CARD */
+.bcard{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:transform .18s,box-shadow .18s,border-color .18s;cursor:pointer;text-decoration:none;display:flex;flex-direction:column;}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 8px 24px var(--shadow);border-color:var(--red-mid);}
+.bcard.hidden{display:none;}
+.bcov{width:100%;aspect-ratio:3/4;position:relative;overflow:hidden;}
+.bcov img{width:100%;height:100%;object-fit:cover;}
+.bcov-ph{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;text-align:center;height:100%;background:linear-gradient(145deg,#F5E8E0,#EDD8C8);}
+.bcov-ph .ico{font-size:30px;opacity:.55;margin-bottom:8px;}
+.bcov-ph .num{font-family:'Lora',serif;font-size:26px;font-weight:600;color:var(--red);opacity:.45;}
+.bcov-ph .verse{font-family:'Tiro Tamil',serif;font-size:11px;color:var(--ink-soft);opacity:.7;margin-top:6px;line-height:1.4;text-align:center;padding:0 8px;}
+.fbadge{position:absolute;top:8px;right:8px;background:rgba(255,255,255,.92);color:var(--red);font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;letter-spacing:.04em;}
+.coming-badge{position:absolute;top:8px;left:8px;background:rgba(255,243,205,.95);color:#856404;font-size:10px;font-weight:600;padding:2px 8px;border-radius:4px;}
+.binfo{padding:11px 13px 13px;flex:1;display:flex;flex-direction:column;gap:5px;}
+.btta{font-family:'Tiro Tamil',serif;font-size:14px;color:var(--ink);line-height:1.4;}
+.bten{font-size:11.5px;color:var(--ink-muted);font-style:italic;line-height:1.3;}
+.btags{display:flex;flex-wrap:wrap;gap:4px;margin-top:3px;}
+.tag{font-size:11px;background:var(--tag-bg);color:var(--tag-text);padding:2px 7px;border-radius:4px;}
+.bopn{display:flex;align-items:center;justify-content:center;gap:5px;margin-top:8px;padding:7px;border-radius:6px;background:var(--red-light);color:var(--red);font-size:11.5px;font-weight:500;text-decoration:none;transition:background .15s;border:none;width:100%;cursor:pointer;font-family:'Inter',sans-serif;}
+.bopn:hover{background:#F0D0D0;}
+.bopn.disabled{background:#eee;color:#aaa;cursor:default;pointer-events:none;}
+
+/* EMPTY */
+#emptyState{display:none;text-align:center;padding:64px 24px;color:var(--ink-muted);}
+#emptyState .ei{font-size:48px;margin-bottom:12px;}
+
+/* MODAL */
+.moverlay{display:none;position:fixed;inset:0;background:rgba(26,18,8,.55);z-index:1000;align-items:center;justify-content:center;padding:20px;}
+.moverlay.open{display:flex;}
+.modal{background:var(--white);border-radius:14px;width:100%;max-width:480px;padding:28px;position:relative;max-height:90vh;overflow-y:auto;}
+.mtitle{font-family:'Lora',serif;font-size:20px;color:var(--ink);margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid var(--border);}
+.fg{margin-bottom:15px;}
+.fg label{display:block;font-size:13px;font-weight:500;color:var(--ink-soft);margin-bottom:5px;}
+.fg input,.fg select,.fg textarea{width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:7px;font-size:14px;font-family:'Tiro Tamil',serif;color:var(--ink);background:var(--cream);outline:none;transition:border-color .2s;}
+.fg input,.fg select{font-family:'Inter',sans-serif;}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--red);}
+.mact{display:flex;gap:10px;justify-content:flex-end;margin-top:20px;}
+.btn-cancel{padding:9px 20px;border:1px solid var(--border);border-radius:7px;background:transparent;color:var(--ink-soft);font-size:14px;cursor:pointer;font-family:'Inter',sans-serif;}
+.btn-save{padding:9px 20px;border:none;border-radius:7px;background:var(--red);color:#fff;font-size:14px;font-weight:500;cursor:pointer;font-family:'Inter',sans-serif;}
+.btn-save:hover{background:var(--red-mid);}
+.mclose{position:absolute;top:16px;right:16px;background:none;border:none;font-size:20px;color:var(--ink-muted);cursor:pointer;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:4px;}
+.mclose:hover{background:var(--red-light);color:var(--red);}
+
+/* FOOTER */
+footer{background:var(--ink);color:rgba(255,255,255,.5);text-align:center;padding:24px;font-size:13px;line-height:1.6;}
+footer .fta{font-family:'Tiro Tamil',serif;color:rgba(255,255,255,.7);font-size:15px;margin-bottom:4px;}
+
+/* RESPONSIVE */
+@media(max-width:640px){
+  .hinner{padding:32px 16px 28px;}
+  main{padding:20px 16px 48px;}
+  .bgrid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:11px;}
+  .tbinner{padding:8px 16px;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hpat"></div>
+  <div class="hinner">
+    <div class="lamp">🪔</div>
+    <div class="title-ta">தமிழ் நீதிக்கதைகள் நூலகம்</div>
+    <div class="title-en">Tamil Moral Stories — A Digital Flipbook Library</div>
+    <div class="orn">❖ ❖ ❖</div>
+  </div>
+</header>
+
+<div class="adminbar" id="adminBar" style="display:none">
+  <div class="abinner">
+    <span>✦ நிர்வாக பட்டை — Admin Mode</span>
+    <button class="btn-add" onclick="openAddModal()">+ புத்தகம் சேர்க்கவும்</button>
+    <button class="btn-add" style="background:var(--gold);color:var(--ink)" onclick="exportData()">⤓ Export JSON</button>
+    <button class="btn-cancel" style="font-size:12px;padding:5px 12px;border:1px solid var(--border);border-radius:6px;background:transparent;cursor:pointer;font-family:'Inter',sans-serif" onclick="toggleAdmin()">Exit Admin</button>
+  </div>
+</div>
+
+<div class="toolbar">
+  <div class="tbinner">
+    <div class="swrap">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="si" placeholder="தேடுங்கள் / Search…" oninput="applyFilters()">
+    </div>
+    <div class="fbtns" id="filterBtns"></div>
+  </div>
+</div>
+
+<main id="mainContent">
+  <div id="emptyState">
+    <div class="ei">📚</div>
+    <p style="font-family:'Tiro Tamil',serif;font-size:18px;">எந்த நூலும் கிடைக்கவில்லை</p>
+    <small style="font-size:13px;margin-top:4px;display:block">No books found for your search.</small>
+  </div>
+</main>
+
+<footer>
+  <div class="fta">தமிழ் இலக்கியத்தின் நீதிகளை அடுத்த தலைமுறைக்கு கொண்டு செல்வோம்</div>
+  <div>Preserving the wisdom of Tamil literature for future generations</div>
+  <div style="margin-top:8px;font-size:11px;opacity:.5">Flipbooks powered by Heyzine</div>
+  <div style="margin-top:6px;font-size:11px;opacity:.3"><a href="#" onclick="toggleAdmin()" style="color:inherit;text-decoration:none">⚙</a></div>
+</footer>
+
+<!-- ADD MODAL -->
+<div class="moverlay" id="addModal">
+  <div class="modal">
+    <button class="mclose" onclick="closeModal()">✕</button>
+    <div class="mtitle">புத்தகம் சேர்க்கவும் / Add Flipbook</div>
+    <div class="fg"><label>Title (Tamil) — தலைப்பு</label><input type="text" id="f_tta" placeholder="e.g. அறஞ்செய விரும்பு"></div>
+    <div class="fg"><label>Title (English)</label><input type="text" id="f_ten" placeholder="e.g. Desire to Do Good"></div>
+    <div class="fg"><label>Heyzine URL</label><input type="url" id="f_url" placeholder="https://heyzine.com/flip-book/..."></div>
+    <div class="fg"><label>Cover Image URL (optional)</label><input type="url" id="f_cov" placeholder="https://...image.jpg"></div>
+    <div class="fg"><label>Source — நூல்</label><select id="f_src" onchange="updateSubSel()"><option value="">— தேர்வு செய்யுங்கள் —</option></select></div>
+    <div class="fg"><label>Sub-section — உட்பிரிவு</label><select id="f_sub"><option value="">— நூல் தேர்ந்தெடுக்கவும் —</option></select></div>
+    <div class="fg"><label>Verse numbers covered (e.g. 1–10)</label><input type="text" id="f_vrng" placeholder="1–10"></div>
+    <div class="fg"><label>Tags (comma-separated)</label><input type="text" id="f_tags" placeholder="e.g. அறம், ஒழுக்கம்"></div>
+    <div class="mact">
+      <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+      <button class="btn-save" onclick="saveBook()">Save</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════════════════════
+// SOURCES — Four works with every verse as a book entry
+// ══════════════════════════════════════════════════════════════════
+const SOURCES = [
+  {
+    id:"aathichudi",
+    ta:"ஆத்திசூடி",
+    en:"Aathichudi",
+    author:"ஔவையார் (Avvaiyar)",
+    icon:"🌺",
+    desc:"ஔவையார் இயற்றிய 109 ஒற்றை வரி நீதி மொழிகள் — அகர வரிசையில் அமைந்தவை. குழந்தைகளுக்கான முதல் நீதி நூல். (109 single-line moral maxims arranged alphabetically — the first ethical text taught to Tamil children.)",
+    subs:[
+      {id:"ac_uir",   ta:"உயிர் வருக்கம் (1–13)",        en:"Vowel Series — 1 to 13",        range:[1,13]},
+      {id:"ac_ka",    ta:"க வருக்கம் (14–43)",           en:"Ka Series — 14 to 43",          range:[14,43]},
+      {id:"ac_sa",    ta:"ச–ஞ வருக்கம் (44–53)",         en:"Sa–Nya Series — 44 to 53",      range:[44,53]},
+      {id:"ac_ta",    ta:"த–ந வருக்கம் (54–75)",         en:"Ta–Na Series — 54 to 75",       range:[54,75]},
+      {id:"ac_pa",    ta:"ப–ம வருக்கம் (76–97)",         en:"Pa–Ma Series — 76 to 97",       range:[76,97]},
+      {id:"ac_va",    ta:"வ–ஒ வருக்கம் (98–109)",        en:"Va–O Series — 98 to 109",       range:[98,109]},
+    ]
+  },
+  {
+    id:"kondraivendum",
+    ta:"கொன்றை வேந்தன்",
+    en:"Kondrai Venthan",
+    author:"ஔவையார் (Avvaiyar)",
+    icon:"🌿",
+    desc:"ஔவையார் இயற்றிய 91 நீதி மொழிகள் — அகர வரிசையில் உயிர் மற்றும் உயிர்மெய் வருக்கங்களில் அமைந்தவை. (91 moral maxims arranged in vowel and consonant series, each a single line of practical wisdom.)",
+    subs:[
+      {id:"kv_uir",   ta:"உயிர் வருக்கம் (1–13)",        en:"Vowel Series — 1 to 13",        range:[1,13]},
+      {id:"kv_ka",    ta:"க வருக்கம் (14–25)",           en:"Ka Series — 14 to 25",          range:[14,25]},
+      {id:"kv_sa",    ta:"ச வருக்கம் (26–36)",           en:"Sa Series — 26 to 36",          range:[26,36]},
+      {id:"kv_ta",    ta:"த வருக்கம் (37–47)",           en:"Ta Series — 37 to 47",          range:[37,47]},
+      {id:"kv_na",    ta:"ந வருக்கம் (48–58)",           en:"Na Series — 48 to 58",          range:[48,58]},
+      {id:"kv_pa",    ta:"ப வருக்கம் (59–69)",           en:"Pa Series — 59 to 69",          range:[59,69]},
+      {id:"kv_ma",    ta:"ம–வ வருக்கம் (70–89)",         en:"Ma–Va Series — 70 to 89",       range:[70,89]},
+      {id:"kv_last",  ta:"ஒ–ஓ வருக்கம் (90–91)",        en:"O–Oo Series — 90 to 91",        range:[90,91]},
+    ]
+  },
+  {
+    id:"muthurai",
+    ta:"மூதுரை",
+    en:"Muthurai",
+    author:"ஔவையார் (Avvaiyar)",
+    icon:"🦚",
+    desc:"ஔவையார் இயற்றிய 30 வெண்பாக்கள் — பழமொழிகளும் உவமைகளும் கொண்டு வாழ்க்கையின் ஆழமான உண்மைகளை எளிய கவிதையில் கூறுகின்றன. மூதுரை என்பது 'மூத்தோர் கூறும் அறிவுரை' என்று பொருள்படும். (30 verses rich in metaphor and proverb — 'Words of the Wise'.)",
+    subs:[
+      {id:"mu_1",     ta:"பாடல்கள் 1–10",               en:"Verses 1–10",                   range:[1,10]},
+      {id:"mu_2",     ta:"பாடல்கள் 11–20",              en:"Verses 11–20",                  range:[11,20]},
+      {id:"mu_3",     ta:"பாடல்கள் 21–30",              en:"Verses 21–30",                  range:[21,30]},
+    ]
+  },
+  {
+    id:"naladiyar",
+    ta:"நாலடியார்",
+    en:"Naladiyar",
+    author:"சமண முனிவர்கள் (Jain Monks, 4th–9th century)",
+    icon:"📿",
+    desc:"எட்டாயிரம் சமண முனிவர்களால் இயற்றப்பட்ட 400 வெண்பாக்கள் — அறம், பொருள், இன்பம், வீடு என்னும் நான்கு பிரிவுகளாக அமைந்தவை. திருக்குறளுக்கு நிகரான நீதி நூல். (400 verses by Jain monks — arranged in four books covering virtue, wealth, love and liberation.)",
+    subs:[
+      {id:"nal_aram1", ta:"அறவியல் — துறவு (1–40)",       en:"Virtue — Renunciation (1–40)",  range:[1,40]},
+      {id:"nal_aram2", ta:"அறவியல் — இல்லறம் (41–100)",   en:"Virtue — Householder (41–100)", range:[41,100]},
+      {id:"nal_por1",  ta:"பொருளியல் — அரசியல் (101–160)",en:"Wealth — Polity (101–160)",     range:[101,160]},
+      {id:"nal_por2",  ta:"பொருளியல் — நட்பு (161–200)",  en:"Wealth — Friendship (161–200)", range:[161,200]},
+      {id:"nal_inb",   ta:"இன்பவியல் (201–300)",          en:"Love — Inbam (201–300)",        range:[201,300]},
+      {id:"nal_veedu", ta:"துறவறவியல் (301–400)",         en:"Renunciation — Veedu (301–400)",range:[301,400]},
+    ]
+  },
+];
+
+// ══════════════════════════════════════════════════════════════════
+// VERSES — Every verse for every sub-section in all four works.
+// 'url' is blank — update with your Heyzine link when ready.
+// ══════════════════════════════════════════════════════════════════
+
+// ── ஆத்திசூடி ──
+const AC_VERSES = [
+  // உயிர் வருக்கம் 1–13
+  [1,"ac_uir","அறஞ்செய விரும்பு","Desire to do good"],
+  [2,"ac_uir","ஆறுவது சினம்","Cool down your anger"],
+  [3,"ac_uir","இயல்வது கரவேல்","Do not hide what you can give"],
+  [4,"ac_uir","ஈவது விலக்கேல்","Do not prevent giving"],
+  [5,"ac_uir","உடையது விளம்பேல்","Do not boast about what you have"],
+  [6,"ac_uir","ஊக்கமது கைவிடேல்","Never give up determination"],
+  [7,"ac_uir","எண்ணெழுத் திகழேல்","Do not belittle numbers and letters"],
+  [8,"ac_uir","ஏற்பது இகழ்ச்சி","Begging is disgraceful"],
+  [9,"ac_uir","ஐயமிட்டு உண்","Share before you eat"],
+  [10,"ac_uir","ஒப்புரவு ஒழுகு","Live in accord with others"],
+  [11,"ac_uir","ஓதுவது ஒழியேல்","Never stop learning"],
+  [12,"ac_uir","ஒளவியம் பேசேல்","Do not speak with jealousy"],
+  [13,"ac_uir","அஃகம் சுருக்கேல்","Do not be miserly with food"],
+  // க வருக்கம் 14–43
+  [14,"ac_ka","கண்டொன்று சொல்லேல்","Do not say one thing and do another"],
+  [15,"ac_ka","ங போல் வளை","Bend like the letter Nga"],
+  [16,"ac_ka","சனி நீராடு","Bathe on Saturdays"],
+  [17,"ac_ka","ஞயம்பட உரை","Speak pleasingly"],
+  [18,"ac_ka","இடம்பட வீடு எடேல்","Do not build a house in a cramped space"],
+  [19,"ac_ka","இணக்கம் அறிந்து இணங்கு","Associate with those who match your character"],
+  [20,"ac_ka","தந்தை தாய்ப் பேண்","Take care of parents"],
+  [21,"ac_ka","நன்றி மறவேல்","Never forget gratitude"],
+  [22,"ac_ka","பருவத்தே பயிர் செய்","Farm in the right season"],
+  [23,"ac_ka","மண்பறித்து உண்ணேல்","Do not eat by snatching land"],
+  [24,"ac_ka","இயல்பு அலாதன செய்யேல்","Do not act against your nature"],
+  [25,"ac_ka","அரவம் ஆட்டேல்","Do not play with snakes"],
+  [26,"ac_ka","இலவம் பஞ்சில் துயில்","Sleep on a cotton bed"],
+  [27,"ac_ka","வஞ்சகம் பேசேல்","Do not speak deceitfully"],
+  [28,"ac_ka","அழகு அலாதன செய்யேல்","Do not do ugly deeds"],
+  [29,"ac_ka","இளமையில் கல்","Learn when young"],
+  [30,"ac_ka","அறனை மறவேல்","Never forget righteousness"],
+  [31,"ac_ka","அனந்தல் ஆடேல்","Do not sleep lazily"],
+  [32,"ac_ka","கடிவது மற","Forget what you have scolded"],
+  [33,"ac_ka","காப்பது விரதம்","Protection is a vow"],
+  [34,"ac_ka","கிழமைப்பட வாழ்","Live according to your duty"],
+  [35,"ac_ka","கீழ்மை அகற்று","Remove baseness"],
+  [36,"ac_ka","குணமது கைவிடேல்","Never give up good character"],
+  [37,"ac_ka","கூடிப் பிரியேல்","Do not part from those you joined"],
+  [38,"ac_ka","கெடுப்பது ஒழி","Stop destroying"],
+  [39,"ac_ka","கேள்வி முயல்","Strive to listen and learn"],
+  [40,"ac_ka","கைவினை கரவேல்","Do not hide your skill"],
+  [41,"ac_ka","கொள்ளை விரும்பேல்","Do not desire plunder"],
+  [42,"ac_ka","கோதாட்டு ஒழி","Give up bad games"],
+  [43,"ac_ka","கௌவை அகற்று","Remove rumour-mongering"],
+  // ச–ஞ வருக்கம் 44–53
+  [44,"ac_sa","சக்கர நெறி நில்","Stand by the path of the wheel of dharma"],
+  [45,"ac_sa","சான்றோர் இனத்திரு","Be among the virtuous"],
+  [46,"ac_sa","சித்திரம் பேசேல்","Do not speak with artful deceit"],
+  [47,"ac_sa","சீர்மை மறவேல்","Never forget excellence"],
+  [48,"ac_sa","சுளிக்கச் சொல்லேல்","Do not speak offensively"],
+  [49,"ac_sa","சூது விரும்பேல்","Do not desire gambling"],
+  [50,"ac_sa","செய்வன திருந்தச் செய்","Do what you do, do it well"],
+  [51,"ac_sa","சேரிடம் அறிந்து சேர்","Know where to associate"],
+  [52,"ac_sa","சையென திரியேல்","Do not wander in filth"],
+  [53,"ac_sa","சொற்சோர்வு படேல்","Do not be weak in speech"],
+  // த–ந வருக்கம் 54–75
+  [54,"ac_ta","சோம்பித் திரியேல்","Do not wander in laziness"],
+  [55,"ac_ta","தக்கோன் எனத் திரி","Walk as a worthy person"],
+  [56,"ac_ta","தானம் அது விரும்பு","Desire to give charity"],
+  [57,"ac_ta","திருமாலுக்கு அடிமை செய்","Serve the Lord"],
+  [58,"ac_ta","தீவினை அகற்று","Remove evil deeds"],
+  [59,"ac_ta","துன்பத்திற்கு இடங்கொடேல்","Do not give room to sorrow"],
+  [60,"ac_ta","தூக்கி வினை செய்","Deliberate before you act"],
+  [61,"ac_ta","தெய்வம் இகழேல்","Do not disrespect God"],
+  [62,"ac_ta","தேசத்தோடு ஒத்துவாழ்","Live in accord with the land"],
+  [63,"ac_ta","தையல் சொல் கேளேல்","Do not heed the words of a seductress"],
+  [64,"ac_ta","தொன்மை மறவேல்","Do not forget ancient wisdom"],
+  [65,"ac_ta","தோற்பன தொடரேல்","Do not pursue losing ventures"],
+  [66,"ac_ta","நன்மை கடைப்பிடி","Hold firmly to goodness"],
+  [67,"ac_ta","நாடு ஒப்பன செய்","Do as the land does"],
+  [68,"ac_ta","நிலையில் பிரியேல்","Do not leave your rightful place"],
+  [69,"ac_ta","நீர்விளை யாடேல்","Do not play in water carelessly"],
+  [70,"ac_ta","நுண்மை நுகரேல்","Do not seek the very subtle"],
+  [71,"ac_ta","நூல் பல கல்","Learn many books"],
+  [72,"ac_ta","நெற்பயிர் விளை","Grow rice crops"],
+  [73,"ac_ta","நேர்பட ஒழுகு","Conduct yourself uprightly"],
+  [74,"ac_ta","நைவினை நணுகேல்","Do not approach weak deeds"],
+  [75,"ac_ta","நொய்ய உரையேல்","Do not speak frivolously"],
+  // ப–ம வருக்கம் 76–97
+  [76,"ac_pa","நோய்க்கு இடங்கொடேல்","Do not give room to disease"],
+  [77,"ac_pa","பழிப்பன பகரேல்","Do not speak words that bring blame"],
+  [78,"ac_pa","பாம்பொடு பழகேல்","Do not befriend a serpent"],
+  [79,"ac_pa","பிழைபடச் சொல்லேல்","Do not speak incorrectly"],
+  [80,"ac_pa","பீடு பெற நில்","Stand to gain honour"],
+  [81,"ac_pa","புகழ்ந்தாரைப் போற்றி வாழ்","Honour those who praise you"],
+  [82,"ac_pa","பூமி திருத்தி உண்","Till the earth and eat"],
+  [83,"ac_pa","பெரியாரைத் துணைக்கொள்","Take the great as your support"],
+  [84,"ac_pa","பேதைமை அகற்று","Remove ignorance"],
+  [85,"ac_pa","பையலோடு இணங்கேல்","Do not associate with the foolish"],
+  [86,"ac_pa","பொருடனைப் போற்றி வாழ்","Guard your wealth and live"],
+  [87,"ac_pa","போர்த்தொழில் புரியேல்","Do not engage in war unnecessarily"],
+  [88,"ac_pa","மனம் தடுமாறேல்","Do not let the mind waver"],
+  [89,"ac_pa","மாற்றானுக்கு இடங்கொடேல்","Do not give room to the enemy"],
+  [90,"ac_pa","மிகைபடச் சொல்லேல்","Do not speak in excess"],
+  [91,"ac_pa","மீதூண் விரும்பேல்","Do not desire to overeat"],
+  [92,"ac_pa","முனை முகத்து நில்லேல்","Do not stand at the forefront of battle"],
+  [93,"ac_pa","மூர்க்கரோடு இணங்கேல்","Do not associate with the stubborn"],
+  [94,"ac_pa","மெல்லினல்லாள் தோள் சேர்","Embrace your gentle wife"],
+  [95,"ac_pa","மேன்மக்கள் சொல் கேள்","Heed the words of the great"],
+  [96,"ac_pa","மைவிழியார் மனை அகல்","Stay away from the houses of women who lure"],
+  [97,"ac_pa","மொழிவது அற மொழி","Speak only righteous words"],
+  // வ–ஒ வருக்கம் 98–109
+  [98,"ac_va","மோகத்தை முனி","Despise excessive desire"],
+  [99,"ac_va","வல்லமை பேசேல்","Do not boast of your strength"],
+  [100,"ac_va","வாதும் முன் கூறேல்","Do not argue first"],
+  [101,"ac_va","வித்தை விரும்பு","Desire knowledge"],
+  [102,"ac_va","வீடு பெற நில்","Strive to attain liberation"],
+  [103,"ac_va","உத்தமன் ஆயிரு","Be an honourable person"],
+  [104,"ac_va","ஊருடன் கூடி வாழ்","Live together with the community"],
+  [105,"ac_va","வெட்டென பேசேல்","Do not speak harshly"],
+  [106,"ac_va","வேண்டி வினை செயேல்","Do not do deeds driven by lust"],
+  [107,"ac_va","வைகறை துயில் எழு","Wake up at dawn"],
+  [108,"ac_va","ஒன்னாரைத் தேறேல்","Do not trust enemies"],
+  [109,"ac_va","ஓரம் சொல்லேல்","Do not be partial in judgement"],
+];
+
+// ── கொன்றை வேந்தன் ──
+const KV_VERSES = [
+  [1,"kv_uir","அன்னையும் பிதாவும் முன்னறி தெய்வம்","Parents are the gods you see before you"],
+  [2,"kv_uir","ஆலயம் தொழுவது சாலவும் நன்று","Worshipping at the temple is very good"],
+  [3,"kv_uir","இல்லறம் அல்லது நல்லறம் அன்று","Without household life there is no true virtue"],
+  [4,"kv_uir","ஈயார் தேட்டைத் தீயார் கொள்வர்","The wealth of the miserly is taken by the wicked"],
+  [5,"kv_uir","உண்பது நாழி உடுப்பது இரண்டே","One measure to eat, two to wear — know your limits"],
+  [6,"kv_uir","ஊருடன் பகைக்கின் வேருடன் கெடும்","Fight with the village and you perish root and all"],
+  [7,"kv_uir","எண்ணும் எழுத்தும் கண்ணெனத் தகும்","Numbers and letters are as precious as the eyes"],
+  [8,"kv_uir","ஏவல் செய்யார்க்கு இல்லை வாழ்வு","Those who obey not have no true life"],
+  [9,"kv_uir","ஐயம் இட்டு உண்","Share with the deserving before you eat"],
+  [10,"kv_uir","ஒருவன் ஒருவனை உதவி செய்க","Let one help another"],
+  [11,"kv_uir","ஓதாமல் ஒருநாளும் இருக்க வேண்டாம்","Never pass a day without learning"],
+  [12,"kv_uir","ஒளவியம் பேசுதல் ஆக்கத்திற்கு அழிவு","Speaking with jealousy brings destruction to growth"],
+  [13,"kv_uir","அஃகம் சுருக்கேல் ஆவது அழிவு","Being stingy with food leads to ruin"],
+  [14,"kv_ka","கற்றோரைக் கற்பவர் விரும்புவர்","The learned are loved by those who seek to learn"],
+  [15,"kv_ka","காய்கனி உண்பான் ஆயுள் பெறுவான்","One who eats fruits and vegetables gains long life"],
+  [16,"kv_ka","கிழக்கு நோக்கி வணங்கினால் கீர்த்தி பெறலாம்","Bow to the east and gain honour"],
+  [17,"kv_ka","கீழோர்க்கு ஒன்றும் இல்லை","The base have nothing of true worth"],
+  [18,"kv_ka","குற்றம் பார்க்கின் சுற்றம் இல்லை","Look for faults and you will have no kin"],
+  [19,"kv_ka","கூரம்பு கோல் வலியான் வெல்வான்","Sharp arrow and strong bow — the determined wins"],
+  [20,"kv_ka","கெடுவது செய்யின் விடுவது கருமம்","If someone harms you, letting go is the noble act"],
+  [21,"kv_ka","கேட்டில் உறுதி கூட்டும் உடைமை","Steadfastness in adversity rebuilds all you have lost"],
+  [22,"kv_ka","கைப்பொருள் தன்னில் மெய்ப்பொருள் கல்வி","True wealth is education, not what you hold in hand"],
+  [23,"kv_ka","கொற்றவன் அறிதல் உற்ற இடத்து உதவி","Knowing the king's mind is help in times of need"],
+  [24,"kv_ka","கோள் செவிக் குறளை காற்றுடன் நெருப்பு","A tale-bearer is like fire aided by wind"],
+  [25,"kv_ka","கௌவை சொல்லின் எவ்வருக்கும் பகை","Speak slander and you make enemies of all"],
+  [26,"kv_sa","சந்ததிக்கு அழகு வந்தி செய்யாமை","The glory of descendants is in not begging"],
+  [27,"kv_sa","சான்றோர் என்கை ஈன்றோர்க்கு அழகு","Being called a noble person glorifies one's mother"],
+  [28,"kv_sa","சிவத்தைப் பேணின் தவத்திற்கு அழகு","Nurturing devotion to Shiva adorns penance"],
+  [29,"kv_sa","சீரைத் தேடின் ஏரைத் தேடு","If you seek prosperity, seek the plough"],
+  [30,"kv_sa","சுற்றத்திற்கு அழகு சூழ இருத்தல்","Beauty of family is being together"],
+  [31,"kv_sa","சூதும் வாதும் வேதனை செய்யும்","Gambling and quarrelling bring suffering"],
+  [32,"kv_sa","செய் தவம் மறந்தால் கைதவம் ஆளும்","Forget your penance and deceit will rule you"],
+  [33,"kv_sa","சேமம் புகினும் யாமத்து உறங்கு","Even in safety, sleep in the midnight hours"],
+  [34,"kv_sa","சை ஒத்திருந்தால் ஐயமிட்டு உண்","If you have enough, give alms and eat"],
+  [35,"kv_sa","சொக்கர் என்பவர் அத்தம் பெறுவர்","Gamblers come to gain nothing"],
+  [36,"kv_sa","சோம்பர் என்பவர் தேம்பித் திரிவர்","The lazy wander in misery"],
+  [37,"kv_ta","தந்தை சொல் மிக்க மந்திரம் இல்லை","There is no mantra greater than a father's word"],
+  [38,"kv_ta","தாயின் சிறந்த ஒரு கோயிலும் இல்லை","There is no temple greater than the mother"],
+  [39,"kv_ta","திரை கடல் ஓடியும் திரவியம் தேடு","Cross the seas if needed but seek your livelihood"],
+  [40,"kv_ta","திராக் கோபம் போரா முடியும்","Fierce anger leads to ruin"],
+  [41,"kv_ta","துடியாப் பெண்டிர் மடியில் நெருப்பு","An unsteady wife is fire in the lap"],
+  [42,"kv_ta","தூற்றும் பெண்டிர் கூற்று எனத் தகும்","Women who slander are akin to death"],
+  [43,"kv_ta","தெய்வம் சீறின் கைதவம் மாளும்","When God is angry, deceit perishes"],
+  [44,"kv_ta","தேடாது அழிக்கின் பாடாய் முடியும்","Spend without earning and end in suffering"],
+  [45,"kv_ta","தையும் மாசியும் வை அகத்து உறங்கு","Sleep indoors in the cold months of Thai and Maasi"],
+  [46,"kv_ta","தொழுது ஊண் சுவையின் உழுது ஊண் இனிது","Food earned by ploughing is sweeter than food given in worship"],
+  [47,"kv_ta","தோழனோடும் ஏழைமை பேசேல்","Do not speak of your poverty even to a friend"],
+  [48,"kv_na","நல் இணக்கம் அல்லது அல்லற்படுத்தும்","Without good association life becomes misery"],
+  [49,"kv_na","நாடு எங்கும் வாழ கேடு ஒன்றும் இல்லை","Living well across the land brings no ruin"],
+  [50,"kv_na","நிற்கக் கற்றல் சொல் திறம்பாமை","To stand firm is to never go back on your word"],
+  [51,"kv_na","நீர் அகம் பொருந்திய ஊரகத்து இரு","Dwell in a place that has water nearby"],
+  [52,"kv_na","நுண்ணிய கருமமும் எண்ணித் துணி","Even subtle acts — think before you dare"],
+  [53,"kv_na","நூல் முறை தெரிந்து சீலத்து ஒழுகு","Know the way of learning and live with virtue"],
+  [54,"kv_na","நெஞ்சை ஒளித்து ஒரு வஞ்சகம் இல்லை","There is no deceit hidden from the heart"],
+  [55,"kv_na","நேரா நோன்பு சீராகாது","A fast without straightness bears no fruit"],
+  [56,"kv_na","நைபவர் எனினும் தொய்ய உரையேல்","Even to those who languish, do not speak weakly"],
+  [57,"kv_na","நொய்யவர் என்பவர் வெய்யவர் ஆவர்","The feeble in conduct become harsh in outcome"],
+  [58,"kv_na","நோன்பு என்பதுவே கொன்று தின்னாமை","Penance is simply not killing and eating"],
+  [59,"kv_pa","பண்ணிய பயிரில் புண்ணியம் தெரியும்","In a well-tended crop, virtue is revealed"],
+  [60,"kv_pa","பாலோடு ஆயினும் காலம் அறிந்து உண்","Even with milk — eat knowing the right time"],
+  [61,"kv_pa","பிறன் மனை புகாமை அறம் எனத் தகும்","Not entering another's home is true virtue"],
+  [62,"kv_pa","பீரம் பேணி பாரம் தாங்கு","Protect your strength and bear your burdens"],
+  [63,"kv_pa","புல்லறிவாளர் பெருமை பேசார்","Those of petty knowledge speak not of greatness"],
+  [64,"kv_pa","பெரியோர் சொல் தெரிந்து கேளாயில்","Hear and discern what the great say"],
+  [65,"kv_pa","பேதமை என்பது கல்லாமை","Ignorance is simply not learning"],
+  [66,"kv_pa","பைந்நாகம் பாய்ந்தாலும் பாம்பிற்கு விடம் இல்லை","Even the striking snake — its venom cannot harm the pure of heart"],
+  [67,"kv_pa","பொன்னுக்கு அழகு ஒளி தான்","The beauty of gold is its lustre"],
+  [68,"kv_pa","போகாத இடமும் தேகாத இடமும் வேண்டாம்","Avoid places that neither prosper nor protect"],
+  [69,"kv_pa","மக்கட்பேறு என்பது மனைவி பேறு","The blessing of children is the blessing of a good wife"],
+  [70,"kv_ma","மடியிலா மன்னவன் தீது","A careless king is a calamity"],
+  [71,"kv_ma","மன்னனும் மலையும் போல் துணை வேண்டும்","One needs support like a king or a mountain"],
+  [72,"kv_ma","மாணவர் கற்ற கல்வி மாறாது","What a student truly learns never fades"],
+  [73,"kv_ma","மிகை ஒழுகல் மேன்மேல் உயர்க்கும்","Outstanding conduct raises you higher and higher"],
+  [74,"kv_ma","முற்பகல் செய்யின் பிற்பகல் விளையும்","What you do in the morning bears fruit in the afternoon"],
+  [75,"kv_ma","மூத்தோர் சொல்லும் வார்த்தை அமிர்தம்","The words of elders are nectar"],
+  [76,"kv_ma","மெத்தையில் படுத்தல் நித்திரைக்கு அழகு","Lying on a soft bed is the beauty of sleep"],
+  [77,"kv_ma","மேழிச் செல்வம் கோழைபடாது","Wealth from the plough does not dwindle"],
+  [78,"kv_ma","மை விழியார்தம் மனை அகன்று ஒழுகு","Stay far from the homes of those with alluring eyes"],
+  [79,"kv_ma","மொழிவது மறுக்கின் அழிவது கருமம்","Refuse what is spoken rightly and the task perishes"],
+  [80,"kv_ma","மோனம் என்பது ஞான வரம்பு","Silence is the boundary of wisdom"],
+  [81,"kv_ma","வளவன் ஆயினும் அளவு அறிந்து அழித்து உண்","Even if rich — know your measure before you spend and eat"],
+  [82,"kv_ma","வானம் சுருங்கின் தானம் சுருங்கும்","When the rains shrink, so does charity"],
+  [83,"kv_ma","விருந்து இலோர்க்கு இல்லை பொருந்திய ஒழுக்கம்","Those with no hospitality have no proper conduct"],
+  [84,"kv_ma","வீரன் கேண்மை கூர் அம்பு ஆகும்","A hero's friendship is a sharp arrow"],
+  [85,"kv_ma","உரவோர் என்கை இரவாது இருத்தல்","The mark of the mighty is living without begging"],
+  [86,"kv_ma","ஊக்கம் உடைமை ஆக்கத்திற்கு அழகு","Enthusiasm is the beauty of achievement"],
+  [87,"kv_ma","வெள்ளைக்கு இல்லை கள்ளச் சிந்தை","A pure mind has no room for deceit"],
+  [88,"kv_ma","வேந்தன் சீறின் ஆம்துணை இல்லை","When the king is angry, there is no refuge"],
+  [89,"kv_ma","வையம் தோறும் தெய்வம் தொழு","Worship God every single day"],
+  [90,"kv_last","ஒத்த இடத்து நித்திரை கொள்","Sleep in an appropriate place"],
+  [91,"kv_last","ஓதாதார்க்கு இல்லை உணர்வொடும் ஒழுக்கம்","Without learning, there is neither sense nor discipline"],
+];
+
+// ── மூதுரை ──
+const MU_VERSES = [
+  [1,"mu_1","வாக்குண்டாம் நல்ல மனமுண்டாம்","May we gain eloquence, a good mind, and Lakshmi's grace"],
+  [2,"mu_1","நன்றி ஒருவற்குச் செய்தக்கால்","A good deed done repays itself, like the coconut's water rising to its crown"],
+  [3,"mu_1","நல்லார் ஒருவர்க்குச் செய்த உபகாரம்","A favour to the good is carved in stone; to the heartless, written on water"],
+  [4,"mu_1","இன்னா இளமை வறுமை வந்தெய்தியக்கால்","Poverty in youth and powerlessness in old age are both cruel"],
+  [5,"mu_1","அட்டாலும் பால்சுவையில் குன்றாது","Milk retains its sweetness when boiled; the noble remain noble in adversity"],
+  [6,"mu_1","அடுத்து முயன்றாலும் ஆகும் நாள் அன்றி","Even if you strive hard, results come only at their appointed time"],
+  [7,"mu_1","உற்ற இடத்தில் உயிர்வழங்கும் தன்மையோர்","Those who give their life for honour never bow before the dishonourable"],
+  [8,"mu_1","நீர் அளவே ஆகுமாம் நீர் ஆம்பல்","The water-lily rises to the depth of the water; wisdom grows with learning"],
+  [9,"mu_1","நல்லாரைக் காண்பதுவும் நன்றே","It is good to see the good, hear the good, speak of the good, and be with the good"],
+  [10,"mu_1","தீயாரைக் காண்பதுவும் தீதே","It is bad to see the bad, hear the bad, speak of the bad, and be with the bad"],
+  [11,"mu_2","நெல்லுக்கு இறைத்த நீர் வாய்க்கால்","Water given to paddy flows and nourishes the grass too — one good person sustains all"],
+  [12,"mu_2","பண்டு முளைப்பது அரிசியே ஆனாலும்","Even rice needs its husk to sprout — even the mighty need humble support"],
+  [13,"mu_2","மடல் பெரிது தாழை","The palmyra leaf is large, but the jasmine fragrance is greater — judge not by size"],
+  [14,"mu_2","கவையாகிக் கொம்பாகிக் காட்டகத்தே நிற்கும்","Trees that branch in the forest — only the one that can read the king's mind is truly good"],
+  [15,"mu_2","கான மயிலாடக் கண்டிருந்த வான்கோழி","The jungle fowl imitating the peacock's dance is like an unlearned man's poetry"],
+  [16,"mu_2","பூமி அளந்தவர் போல் பொய் சொல்லி","Those who lie to measure wealth are like land without rain"],
+  [17,"mu_2","ஆர்த்த இருளகன்று ஆனால் பகல் வரும்","When thick darkness passes, daylight comes — suffering too will end"],
+  [18,"mu_2","சான்றாண்மை என்பது கேட்கத்தக்க","Nobility is that which, when heard, the world admires"],
+  [19,"mu_2","கொடுத்தும் கொண்டும் தன் ஆக்கம் நோக்கி","Give and take wisely, watch your progress — true friendship endures"],
+  [20,"mu_2","என் பயன் கொல்லோ","What is the use of learning if you do not apply it to uplift yourself?"],
+  [21,"mu_3","ஓதி உணர்ந்தும் ஒழுகா மனிதர்","Those who study and understand yet do not practise — what use are they?"],
+  [22,"mu_3","ஆமை போல் அவயவம் அடக்கி ஒழுகு","Draw in your senses like a tortoise draws in its limbs"],
+  [23,"mu_3","கல்லாதவர் கண் இருந்தும் குருடர்","The unlearned have eyes but see not — they are truly blind"],
+  [24,"mu_3","வையத்து வாழ்வாங்கு வாழ்பவன்","One who lives in this world with goodness lives truly"],
+  [25,"mu_3","நஞ்சுடைய தானறிந்து நாகம் கடிக்கும்","The serpent knows its own venom; the wise know their own nature and act rightly"],
+  [26,"mu_3","கல்லாமை அல்லது இல்லை குறைவு","There is no deficiency other than ignorance"],
+  [27,"mu_3","யாவரும் வேண்டும் பொருள் ஒன்றே","What all people need is the same — a good character"],
+  [28,"mu_3","மாசு உண்ட தாமரை போல்","Like a lotus touched by filth, bad company stains even the good"],
+  [29,"mu_3","நாடு சீர்தூக்கின்","When the land is weighed rightly, the good ruler is its measure"],
+  [30,"mu_3","சாந்தனையும் தீயனவே செய்திடினும்","Even those who harm them — the wise protect them, like the tree that shades the one who cuts it"],
+];
+
+// ── நாலடியார் ──
+const NAL_VERSES = [
+  // அறவியல் — துறவு 1–40
+  [1,"nal_aram1","வாழினும் வாழ்க","Live well if you must live"],
+  [2,"nal_aram1","வலியார்க்கு வணங்குதல்","Bowing to the powerful brings no shame to the wise"],
+  [3,"nal_aram1","மனைக்கு அணி மாண்புடை மடந்தை","The glory of a home is a virtuous wife"],
+  [4,"nal_aram1","வினையால் வினை தீர்க்கும்","Deed undoes deed — act wisely"],
+  [5,"nal_aram1","வறியவர்க்கு ஒன்று ஈகை","Giving to the poor is the truest charity"],
+  [6,"nal_aram1","கேட்டினும் உய்வர் கேட்பவர்","Those who listen even to hardship shall survive"],
+  [7,"nal_aram1","செறிவறிந்து சீர்மை பயக்கும்","Knowing restraint brings dignity"],
+  [8,"nal_aram1","அணங்காய அன்னை மனம்","A mother's love is the protection of the world"],
+  [9,"nal_aram1","பொறையுடையான் பொற்கலம் போல்","The forbearing is like a golden vessel"],
+  [10,"nal_aram1","யாதும் ஊரே யாவரும் கேளிர்","Every town is our town, every person is our kin"],
+  [11,"nal_aram1","இன்சொலன் ஆகுக","Be a speaker of sweet words"],
+  [12,"nal_aram1","ஒல்லும் வகையான் அறவினை"],
+  [13,"nal_aram1","இல்வாழ்வான் என்பான் இயல்புடைய"],
+  [14,"nal_aram1","தக்கார் இனத்தனாய்"],
+  [15,"nal_aram1","ஒருமைக்கண் தான் கற்ற கல்வி"],
+  [16,"nal_aram1","மறவன் புலர்கின்ற"],
+  [17,"nal_aram1","நாளும் ஒரு காசு"],
+  [18,"nal_aram1","கடல் ஓடாக் கண்ணோட்டம்"],
+  [19,"nal_aram1","படை ஒடுக்கம் பாயிரம் உடையார்"],
+  [20,"nal_aram1","ஊர் ஆவது சான்றோர் உறை"],
+  [21,"nal_aram1","யாதனால் யாதனால் நீங்கியான்"],
+  [22,"nal_aram1","கொல்லான் புலாலை மறுத்தானை"],
+  [23,"nal_aram1","உண்ண உறக்கும் உறை"],
+  [24,"nal_aram1","இடுக்கண் வருங்கால் நகுக"],
+  [25,"nal_aram1","அரிது அரிது மானிடர் ஆதல்"],
+  [26,"nal_aram1","மலர்தலை உலகத்து மறைந்தோர்"],
+  [27,"nal_aram1","அச்சம் பெரிது மிகவும்"],
+  [28,"nal_aram1","இரவு என்னும் ஏமாவாய்"],
+  [29,"nal_aram1","நாட்பட் டகழி நலம்"],
+  [30,"nal_aram1","கொடுப்பதொன்று இல்லென்று"],
+  [31,"nal_aram1","செல்வம் பெறுமாறு"],
+  [32,"nal_aram1","கற்பென்னும் கற்பு"],
+  [33,"nal_aram1","விலங்கொடு மக்கள் அனையர்"],
+  [34,"nal_aram1","ஆசை அறுமின்"],
+  [35,"nal_aram1","வசை இலா நல்ல குடி"],
+  [36,"nal_aram1","கற்றவர் கற்றாரே"],
+  [37,"nal_aram1","ஒழுக்கம் உடைமை"],
+  [38,"nal_aram1","ஊழி பெயரினும்"],
+  [39,"nal_aram1","எண்ணிய எண்ணியாங்கு"],
+  [40,"nal_aram1","தாளாண்மை என்னும்"],
+  // அறவியல் — இல்லறம் 41–100 (selected key verses)
+  [41,"nal_aram2","யாக்கை நிலையாமை"],
+  [42,"nal_aram2","மண்ணாசை மாளாது"],
+  [43,"nal_aram2","வருமுன்னர் காவாதான்"],
+  [44,"nal_aram2","செல்வம் சிறப்பு ஆயினும்"],
+  [45,"nal_aram2","வையமும் தவமும்"],
+  [50,"nal_aram2","ஆரியம் கற்று"],
+  [60,"nal_aram2","நல்கூர்ந்தார் நட்பும்"],
+  [70,"nal_aram2","இளமை இடும்பை"],
+  [80,"nal_aram2","செய்யாமல் செய்த"],
+  [90,"nal_aram2","உறங்குவது போலும்"],
+  [100,"nal_aram2","கற்று ஒழுகுக"],
+  // பொருளியல் — அரசியல் 101–160
+  [101,"nal_por1","அன்பினார் கேண்மை"],
+  [110,"nal_por1","கூழும் குடியும்"],
+  [120,"nal_por1","ஊண் உறக்கம்"],
+  [130,"nal_por1","கல்லா மடவார்"],
+  [140,"nal_por1","பொருளே பிரிவின்"],
+  [150,"nal_por1","நட்பாய்ப் பழகும்"],
+  [160,"nal_por1","வாழ்க்கை நட்பு"],
+  // பொருளியல் — நட்பு 161–200
+  [161,"nal_por2","உடன் பிறந்தவர்"],
+  [170,"nal_por2","நட்டார்க்கு நல்லன"],
+  [180,"nal_por2","ஒத்த இடத்து"],
+  [190,"nal_por2","பெருமையும் ஏனை"],
+  [200,"nal_por2","அன்புடைய நட்பு"],
+  // இன்பவியல் 201–300
+  [201,"nal_inb","அழிவதூஉம்"],
+  [210,"nal_inb","காமம் கடு விசை"],
+  [220,"nal_inb","உவந்துறையும்"],
+  [230,"nal_inb","மலர் அன்ன கண்ணாள்"],
+  [240,"nal_inb","வேட்கையார் நெஞ்சம்"],
+  [250,"nal_inb","கையறு நெஞ்சம்"],
+  [260,"nal_inb","காமம் கட்கு அமைந்த"],
+  [270,"nal_inb","வந்தாய்க்கு"],
+  [280,"nal_inb","உரவுடை நெஞ்சம்"],
+  [290,"nal_inb","யாம் மறைக்கும்"],
+  [300,"nal_inb","சொல்லிய சொல்"],
+  // துறவறவியல் 301–400
+  [301,"nal_veedu","துறவு"],
+  [310,"nal_veedu","அழுக்காறு இல்லை"],
+  [320,"nal_veedu","ஒழுக்கம்"],
+  [330,"nal_veedu","கோல் கொண்டு"],
+  [340,"nal_veedu","வேண்டா உலகு"],
+  [350,"nal_veedu","வீடு பேறு"],
+  [360,"nal_veedu","ஞானம்"],
+  [370,"nal_veedu","பொய்யாமை"],
+  [380,"nal_veedu","மெய்ம்மை"],
+  [390,"nal_veedu","தவம்"],
+  [400,"nal_veedu","கடவுள் வாழ்த்து"],
+];
+
+// Build books array from verse data
+function buildBooks() {
+  const saved = localStorage.getItem('tsl_books_v2');
+  if (saved) return JSON.parse(saved);
+
+  const books = [];
+  const addVerses = (arr, srcId) => {
+    arr.forEach(v => {
+      const [num, subId, ta, en] = v;
+      books.push({
+        id: srcId + '_' + num,
+        num,
+        ta: ta || ('பாடல் ' + num),
+        en: en || '',
+        source: srcId,
+        sub: subId,
+        url: '',  // ← Update with Heyzine URL
+        cover: '',
+        tags: [],
+      });
+    });
+  };
+  addVerses(AC_VERSES, 'aathichudi');
+  addVerses(KV_VERSES, 'kondraivendum');
+  addVerses(MU_VERSES, 'muthurai');
+  addVerses(NAL_VERSES, 'naladiyar');
+  return books;
+}
+
+let BOOKS = buildBooks();
+
+// ══════════════════════════════════════════════════════════════════
+// APP STATE
+// ══════════════════════════════════════════════════════════════════
+let activeFilter = 'all';
+let adminMode = false;
+let adminClicks = 0;
+let adminTimer = null;
+
+// ══════════════════════════════════════════════════════════════════
+// RENDER
+// ══════════════════════════════════════════════════════════════════
+function renderAll() {
+  const main = document.getElementById('mainContent');
+  main.innerHTML = '';
+
+  const query = document.getElementById('si').value.toLowerCase().trim();
+  let totalVisible = 0;
+
+  SOURCES.forEach((src, idx) => {
+    const srcBooks = BOOKS.filter(b => b.source === src.id);
+
+    const section = document.createElement('div');
+    section.className = 'lsec';
+    section.id = 'sec-' + src.id;
+
+    const hasAny = activeFilter === 'all' || activeFilter === src.id;
+
+    section.innerHTML = `
+      <div class="sechdr">
+        <div class="secnum">${idx+1}</div>
+        <div class="sectitles">
+          <div class="stta">${src.icon} ${src.ta}</div>
+          <div class="sten">${src.en} &nbsp;·&nbsp; ${src.author}</div>
+          <div class="sdesc">${src.desc}</div>
+        </div>
+        <button class="stog" onclick="toggleSection('${src.id}')" id="tog-${src.id}">▼</button>
+      </div>
+      <div id="secbody-${src.id}"></div>
+    `;
+
+    main.appendChild(section);
+    if (!hasAny) { section.classList.add('hidden'); return; }
+
+    const body = document.getElementById('secbody-' + src.id);
+    let secVisible = 0;
+
+    src.subs.forEach(sub => {
+      const subBooks = srcBooks.filter(b => b.sub === sub.id);
+      if (subBooks.length === 0) return;
+
+      const subEl = document.createElement('div');
+      subEl.className = 'subsec';
+
+      const visCount = subBooks.filter(b => matchesFilter(b, query)).length;
+
+      subEl.innerHTML = `
+        <div class="subhdr">
+          <span class="sublbl">${sub.en}</span>
+          <span class="sublbl-ta">${sub.ta}</span>
+          <div class="subrule"></div>
+          <span class="subcount">${subBooks.length} பாடல்கள்</span>
+        </div>
+        <div class="bgrid" id="grid-${src.id}-${sub.id}"></div>
+      `;
+      body.appendChild(subEl);
+
+      const grid = document.getElementById(`grid-${src.id}-${sub.id}`);
+      subBooks.forEach(book => {
+        const vis = matchesFilter(book, query);
+        if (vis) { totalVisible++; secVisible++; }
+        grid.appendChild(buildCard(book, vis));
+      });
+
+      if (adminMode) {
+        const addBtn = document.createElement('button');
+        addBtn.style.cssText='border:1.5px dashed var(--border);background:transparent;border-radius:10px;min-height:100px;color:var(--ink-muted);font-size:12px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-family:Inter,sans-serif;';
+        addBtn.innerHTML = `<span style="font-size:20px">＋</span><span>${sub.ta}</span>`;
+        addBtn.onclick = () => openAddModal(src.id, sub.id);
+        grid.appendChild(addBtn);
+      }
+    });
+
+    if (secVisible === 0 && !adminMode && query) section.classList.add('hidden');
+  });
+
+  document.getElementById('emptyState').style.display = (totalVisible === 0 && !adminMode) ? 'block' : 'none';
+  if (totalVisible === 0 && !adminMode) main.appendChild(document.getElementById('emptyState'));
+  updateCounts();
+}
+
+function matchesFilter(book, query) {
+  if (activeFilter !== 'all' && book.source !== activeFilter) return false;
+  if (!query) return true;
+  return [book.ta, book.en, String(book.num)].join(' ').toLowerCase().includes(query);
+}
+
+function buildCard(book, visible) {
+  const a = document.createElement('a');
+  a.className = 'bcard' + (visible ? '' : ' hidden');
+  const hasLink = book.url && book.url.trim() !== '';
+  a.href = hasLink ? book.url : '#';
+  if (hasLink) { a.target = '_blank'; a.rel = 'noopener'; }
+
+  const src = SOURCES.find(s => s.id === book.source);
+  const coverHtml = book.cover
+    ? `<img src="${book.cover}" alt="${book.ta}" loading="lazy" onerror="this.parentElement.innerHTML='${phHtml(book, src)}';">`
+    : phHtml(book, src);
+
+  a.innerHTML = `
+    <div class="bcov">
+      ${coverHtml}
+      ${hasLink ? '<span class="fbadge">FLIP</span>' : '<span class="coming-badge">இணைப்பு இல்லை</span>'}
+    </div>
+    <div class="binfo">
+      <div class="btta">${book.num}. ${book.ta}</div>
+      ${book.en ? `<div class="bten">${book.en}</div>` : ''}
+      <button class="bopn${hasLink ? '' : ' disabled'}" onclick="event.preventDefault();${hasLink ? `window.open('${book.url}','_blank')` : ''}">
+        📖 ${hasLink ? 'திறக்கவும் / Open' : 'விரைவில் / Coming Soon'}
+      </button>
+    </div>
+  `;
+
+  if (adminMode) {
+    a.style.position = 'relative';
+    const editBtn = document.createElement('button');
+    editBtn.style.cssText = 'position:absolute;top:6px;left:6px;background:rgba(26,18,8,.8);color:#fff;border:none;border-radius:4px;font-size:10px;padding:2px 6px;cursor:pointer;z-index:10;';
+    editBtn.textContent = '✎ URL';
+    editBtn.onclick = (e) => { e.preventDefault(); e.stopPropagation(); editBookUrl(book.id); };
+    a.appendChild(editBtn);
+  }
+  return a;
+}
+
+function phHtml(book, src) {
+  const verse = book.ta.length > 18 ? book.ta.substring(0,18) + '…' : book.ta;
+  return `<div class="bcov-ph"><div class="ico">${src ? src.icon : '📖'}</div><div class="num">${book.num}</div><div class="verse">${verse}</div></div>`;
+}
+
+// ══════════════════════════════════════════════════════════════════
+// FILTER BUTTONS
+// ══════════════════════════════════════════════════════════════════
+function buildFilterButtons() {
+  const bar = document.getElementById('filterBtns');
+  bar.innerHTML = '';
+
+  const allBtn = document.createElement('button');
+  allBtn.className = 'fb active';
+  allBtn.dataset.filter = 'all';
+  allBtn.onclick = function() { setFilter(this,'all'); };
+  allBtn.innerHTML = `அனைத்தும் <span class="cbadge" id="cnt-all">0</span>`;
+  bar.appendChild(allBtn);
+
+  // ஔவையார் group label
+  const lbl = document.createElement('span');
+  lbl.className = 'fgrp-lbl';
+  lbl.textContent = '✦ ஔவையார்:';
+  bar.appendChild(lbl);
+
+  SOURCES.forEach(src => {
+    const btn = document.createElement('button');
+    btn.className = 'fb';
+    btn.dataset.filter = src.id;
+    btn.onclick = function() { setFilter(this, src.id); };
+    btn.innerHTML = `${src.icon} ${src.ta} <span class="cbadge" id="cnt-${src.id}">0</span>`;
+    bar.appendChild(btn);
+
+    // separator before நாலடியார்
+    if (src.id === 'muthurai') {
+      const sep = document.createElement('span');
+      sep.className = 'fgrp-lbl';
+      sep.textContent = '✦ நாலடியார்:';
+      bar.appendChild(sep);
+    }
+  });
+}
+
+function setFilter(el, filter) {
+  document.querySelectorAll('.fb').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  activeFilter = filter;
+  applyFilters();
+}
+
+function applyFilters() { renderAll(); }
+
+function updateCounts() {
+  const q = document.getElementById('si').value.toLowerCase().trim();
+  const el = document.getElementById('cnt-all');
+  if (el) el.textContent = BOOKS.filter(b => matchesQuery(b,q)).length;
+  SOURCES.forEach(src => {
+    const c = BOOKS.filter(b => b.source === src.id && matchesQuery(b,q)).length;
+    const el2 = document.getElementById('cnt-' + src.id);
+    if (el2) el2.textContent = c;
+  });
+}
+
+function matchesQuery(book, q) {
+  if (!q) return true;
+  return [book.ta, book.en, String(book.num)].join(' ').toLowerCase().includes(q);
+}
+
+// ══════════════════════════════════════════════════════════════════
+// SECTION COLLAPSE
+// ══════════════════════════════════════════════════════════════════
+function toggleSection(id) {
+  const body = document.getElementById('secbody-' + id);
+  const tog = document.getElementById('tog-' + id);
+  const hidden = body.style.display === 'none';
+  body.style.display = hidden ? '' : 'none';
+  tog.textContent = hidden ? '▼' : '▶';
+}
+
+// ══════════════════════════════════════════════════════════════════
+// EDIT URL (main admin action)
+// ══════════════════════════════════════════════════════════════════
+function editBookUrl(bookId) {
+  const book = BOOKS.find(b => b.id === bookId);
+  if (!book) return;
+  const url = prompt(`Heyzine URL for "${book.num}. ${book.ta}":`, book.url || '');
+  if (url === null) return;
+  book.url = url.trim();
+  localStorage.setItem('tsl_books_v2', JSON.stringify(BOOKS));
+  renderAll();
+}
+
+// ══════════════════════════════════════════════════════════════════
+// ADD / SAVE MODAL (for extra books not in the verse list)
+// ══════════════════════════════════════════════════════════════════
+function openAddModal(srcId, subId) {
+  populateSrcSelect();
+  if (srcId) { document.getElementById('f_src').value = srcId; updateSubSel(); }
+  if (subId) document.getElementById('f_sub').value = subId;
+  document.getElementById('addModal').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('addModal').classList.remove('open');
+  ['f_tta','f_ten','f_url','f_cov','f_vrng','f_tags'].forEach(id => { document.getElementById(id).value = ''; });
+}
+
+function populateSrcSelect() {
+  const sel = document.getElementById('f_src');
+  sel.innerHTML = '<option value="">— தேர்வு செய்யுங்கள் —</option>';
+  SOURCES.forEach(s => { sel.innerHTML += `<option value="${s.id}">${s.icon} ${s.ta} — ${s.en}</option>`; });
+}
+
+function updateSubSel() {
+  const srcId = document.getElementById('f_src').value;
+  const sel = document.getElementById('f_sub');
+  sel.innerHTML = '<option value="">— தேர்வு செய்யுங்கள் —</option>';
+  const src = SOURCES.find(s => s.id === srcId);
+  if (src) src.subs.forEach(s => { sel.innerHTML += `<option value="${s.id}">${s.ta}</option>`; });
+}
+
+function saveBook() {
+  const ta = document.getElementById('f_tta').value.trim();
+  const url = document.getElementById('f_url').value.trim();
+  const source = document.getElementById('f_src').value;
+  if (!ta || !source) { alert('Title (Tamil) and Source are required.'); return; }
+  const book = {
+    id: 'extra_' + Date.now(),
+    num: BOOKS.filter(b => b.source === source).length + 1,
+    ta, en: document.getElementById('f_ten').value.trim(),
+    source, sub: document.getElementById('f_sub').value,
+    url, cover: document.getElementById('f_cov').value.trim(),
+    vrng: document.getElementById('f_vrng').value.trim(),
+    tags: document.getElementById('f_tags').value.split(',').map(t => t.trim()).filter(Boolean),
+  };
+  BOOKS.push(book);
+  localStorage.setItem('tsl_books_v2', JSON.stringify(BOOKS));
+  closeModal();
+  renderAll();
+}
+
+function exportData() {
+  const blob = new Blob([JSON.stringify(BOOKS, null, 2)], { type:'application/json' });
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+  a.download = 'tamil-stories-books.json'; a.click();
+}
+
+// ══════════════════════════════════════════════════════════════════
+// ADMIN (click ⚙ 3x)
+// ══════════════════════════════════════════════════════════════════
+function toggleAdmin() {
+  adminClicks++;
+  clearTimeout(adminTimer);
+  adminTimer = setTimeout(() => { adminClicks = 0; }, 2000);
+  if (adminClicks >= 3) {
+    adminClicks = 0;
+    const pwd = prompt('Admin password:');
+    if (pwd === 'koviloor2025') {
+      adminMode = !adminMode;
+      document.getElementById('adminBar').style.display = adminMode ? 'block' : 'none';
+      renderAll();
+    }
+  }
+}
+
+// ══════════════════════════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════════════════════════
+buildFilterButtons();
+renderAll();
+</script>
+</body>
+</html>
