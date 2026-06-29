@@ -183,7 +183,7 @@ export default function App() {
               <div style={{ flex:1, minWidth:180, textAlign:'right' }}>
                 <div style={{ fontSize:12.5, color:'#3D3320', lineHeight:1.8 }}>
                   <div>📞 97893 36720, 94433 35312</div>
-                  <div>✉ sinaiyar@gmail.com</div>
+                  <div>✉ slnaiyar@gmail.com</div>
                 </div>
                 <div style={{ marginTop:8, fontSize:13, color:'#7A1414', lineHeight:1.5, fontStyle:'italic' }}>
                   Sri La Sri<br/>
@@ -244,67 +244,101 @@ export default function App() {
 
         </div>
       </div>
-      <div style={{ background:'#fff', borderBottom:'1px solid #D9CEBC', position:'sticky', top:0, zIndex:100 }}>
-        <div style={{ maxWidth:1100, margin:'0 auto', padding:'10px 24px', display:'flex', flexDirection:'column', gap:8 }}>
-          {/* Row 1 — Search */}
-          <div style={{ position:'relative' }}>
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#6B5C40" strokeWidth="2" style={{ position:'absolute', left:10, top:'50%', transform:'translateY(-50%)' }}><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-            <input value={query} onChange={e=>setQuery(e.target.value)} placeholder="தேடுங்கள் / Search…" style={{ width:'100%', padding:'8px 12px 8px 34px', border:'1px solid #D9CEBC', borderRadius:8, fontSize:14, background:'#FAF6ED', color:'#1A1208', outline:'none', fontFamily:'Inter', boxSizing:'border-box' }} />
+      {/* BODY — Sidebar + Content */}
+      <div style={{ display:'flex' }}>
+
+        {/* ── LEFT SIDEBAR ── */}
+        <div style={{ width:210, flexShrink:0, background:'#fff', borderRight:'1px solid #D9CEBC', position:'sticky', top:0, height:'100vh', overflowY:'auto', display:'flex', flexDirection:'column' }}>
+
+          {/* Search */}
+          <div style={{ padding:'10px 10px 8px', borderBottom:'1px solid #D9CEBC' }}>
+            <div style={{ position:'relative' }}>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6B5C40" strokeWidth="2" style={{ position:'absolute', left:8, top:'50%', transform:'translateY(-50%)' }}><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input value={query} onChange={e=>setQuery(e.target.value)} placeholder="தேடு…"
+                style={{ width:'100%', padding:'7px 8px 7px 26px', border:'1px solid #D9CEBC', borderRadius:6, fontSize:13, background:'#FAF6ED', color:'#1A1208', outline:'none', boxSizing:'border-box', fontFamily:'Inter' }} />
+            </div>
           </div>
-          {/* Row 2 — Filter buttons */}
-          <div style={{ display:'flex', gap:6, flexWrap:'wrap', alignItems:'center' }}>
-            <button onClick={()=>setFilter('all')}
-              style={{ padding:'5px 14px', borderRadius:20, border:`1px solid ${filter==='all'?'#7A1414':'#D9CEBC'}`, background:filter==='all'?'#7A1414':'transparent', color:filter==='all'?'#fff':'#3D3320', fontSize:12, cursor:'pointer', whiteSpace:'nowrap' }}>
-              அனைத்தும் / All
+
+          {/* Nav */}
+          <nav style={{ flex:1, padding:'6px 0' }}>
+            {/* Intro */}
+            <button onClick={()=>{ setFilter('all'); setTimeout(()=>document.getElementById('intro-box')?.scrollIntoView({behavior:'smooth'}),50); }}
+              style={{ width:'100%', textAlign:'left', padding:'10px 14px', border:'none', background:'transparent', color:'#3D3320', fontSize:13, cursor:'pointer', fontFamily:'Tiro Tamil, serif', borderLeft:'3px solid transparent', display:'flex', alignItems:'center', gap:8 }}>
+              📜 அறிமுகம்
             </button>
-            <span style={{ fontSize:10, color:'#6B5C40', padding:'0 2px' }}>✦ ஔவையார்:</span>
-            {SOURCES.filter(s => s.id !== 'naladiyar').map(src => {
-              const cnt = books.filter(b => b.source===src.id && matchQ(b,query)).length;
+
+            <div style={{ padding:'8px 14px 3px', fontSize:10, fontWeight:600, color:'#B8860B', letterSpacing:'.08em' }}>✦ ஔவையார்</div>
+
+            {SOURCES.filter(s=>s.id!=='naladiyar').map(src => {
+              const cnt = books.filter(b=>b.source===src.id && b.url).length;
+              const total = books.filter(b=>b.source===src.id).length;
               const active = filter===src.id;
               return (
-                <button key={src.id} onClick={()=>setFilter(filter===src.id?'all':src.id)}
-                  style={{ padding:'5px 12px', borderRadius:20, border:`1px solid ${active?'#7A1414':'#D9CEBC'}`, background:active?'#7A1414':'transparent', color:active?'#fff':'#3D3320', fontSize:12, cursor:'pointer', whiteSpace:'nowrap', display:'flex', alignItems:'center', gap:4 }}>
-                  {src.icon} {src.ta} <span style={{ background:active?'rgba(255,255,255,.25)':'#F5E8E8', color:active?'#fff':'#7A1414', fontSize:11, fontWeight:600, padding:'1px 6px', borderRadius:10 }}>{cnt}</span>
+                <button key={src.id}
+                  onClick={()=>{ setFilter(src.id); setTimeout(()=>document.getElementById('sec-'+src.id)?.scrollIntoView({behavior:'smooth'}),50); }}
+                  style={{ width:'100%', textAlign:'left', padding:'10px 14px', border:'none', background:active?'#F5E8E8':'transparent', color:active?'#7A1414':'#3D3320', fontSize:13, cursor:'pointer', fontFamily:'Tiro Tamil, serif', borderLeft:active?'3px solid #7A1414':'3px solid transparent' }}>
+                  <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between' }}>
+                    <span>{src.icon} {src.ta}</span>
+                    <span style={{ fontSize:10, background:cnt>0?'#E8F5E9':'#F5E8E8', color:cnt>0?'#2E7D32':'#7A1414', padding:'1px 5px', borderRadius:8, fontFamily:'Inter', fontWeight:600 }}>{cnt}/{total}</span>
+                  </div>
                 </button>
               );
             })}
-            <span style={{ fontSize:10, color:'#6B5C40', padding:'0 2px' }}>✦ நாலடியார்:</span>
-            {SOURCES.filter(s => s.id === 'naladiyar').map(src => {
-              const cnt = books.filter(b => b.source===src.id && matchQ(b,query)).length;
+
+            <div style={{ padding:'8px 14px 3px', fontSize:10, fontWeight:600, color:'#B8860B', letterSpacing:'.08em' }}>✦ நாலடியார்</div>
+
+            {SOURCES.filter(s=>s.id==='naladiyar').map(src => {
+              const cnt = books.filter(b=>b.source===src.id && b.url).length;
+              const total = books.filter(b=>b.source===src.id).length;
               const active = filter===src.id;
               return (
-                <button key={src.id} onClick={()=>setFilter(filter===src.id?'all':src.id)}
-                  style={{ padding:'5px 12px', borderRadius:20, border:`1px solid ${active?'#7A1414':'#D9CEBC'}`, background:active?'#7A1414':'transparent', color:active?'#fff':'#3D3320', fontSize:12, cursor:'pointer', whiteSpace:'nowrap', display:'flex', alignItems:'center', gap:4 }}>
-                  {src.icon} {src.ta} <span style={{ background:active?'rgba(255,255,255,.25)':'#F5E8E8', color:active?'#fff':'#7A1414', fontSize:11, fontWeight:600, padding:'1px 6px', borderRadius:10 }}>{cnt}</span>
+                <button key={src.id}
+                  onClick={()=>{ setFilter(src.id); setTimeout(()=>document.getElementById('sec-'+src.id)?.scrollIntoView({behavior:'smooth'}),50); }}
+                  style={{ width:'100%', textAlign:'left', padding:'10px 14px', border:'none', background:active?'#F5E8E8':'transparent', color:active?'#7A1414':'#3D3320', fontSize:13, cursor:'pointer', fontFamily:'Tiro Tamil, serif', borderLeft:active?'3px solid #7A1414':'3px solid transparent' }}>
+                  <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between' }}>
+                    <span>{src.icon} {src.ta}</span>
+                    <span style={{ fontSize:10, background:cnt>0?'#E8F5E9':'#F5E8E8', color:cnt>0?'#2E7D32':'#7A1414', padding:'1px 5px', borderRadius:8, fontFamily:'Inter', fontWeight:600 }}>{cnt}/{total}</span>
+                  </div>
                 </button>
+              );
+            })}
+          </nav>
+
+          {/* Manage links */}
+          <div style={{ padding:10, borderTop:'1px solid #D9CEBC' }}>
+            <button onClick={openAdmin} style={{ width:'100%', padding:'8px', background:'#7A1414', color:'#fff', border:'none', borderRadius:6, fontSize:12, cursor:'pointer', fontFamily:'Inter' }}>
+              🔗 Manage Links
+            </button>
+          </div>
+        </div>
+
+        {/* ── MAIN CONTENT ── */}
+        <div style={{ flex:1, minWidth:0, overflowX:'hidden', padding:'0 0 64px' }}>
+
+          {/* Intro box anchor */}
+          <div id="intro-box" />
+
+          {/* Book sections */}
+          <div style={{ padding:'16px 24px 64px' }}>
+            {SOURCES.map((src, idx) => {
+              if (filter !== 'all' && filter !== src.id) return null;
+              const srcBooks = books.filter(b => b.source===src.id);
+              return (
+                <div id={'sec-'+src.id} key={src.id}>
+                  <Section src={src} idx={idx} srcBooks={srcBooks} query={query}
+                    saving={saving} onSave={saveUrl} expandedPoem={expandedPoem} setExpandedPoem={setExpandedPoem} />
+                </div>
               );
             })}
           </div>
         </div>
       </div>
 
-      {/* MAIN */}
-      <main style={{ maxWidth:1100, margin:'0 auto', padding:'28px 24px 64px' }}>
-        {SOURCES.map((src, idx) => {
-          if (filter !== 'all' && filter !== src.id) return null;
-          const srcBooks = books.filter(b => b.source===src.id);
-          return (
-            <Section key={src.id} src={src} idx={idx} srcBooks={srcBooks} query={query}
-              saving={saving} onSave={saveUrl} expandedPoem={expandedPoem} setExpandedPoem={setExpandedPoem} />
-          );
-        })}
-      </main>
-
       {/* FOOTER */}
       <footer style={{ background:'#1A1208', color:'rgba(255,255,255,.5)', textAlign:'center', padding:24, fontSize:13, lineHeight:1.6 }}>
         <div style={{ fontFamily:'Tiro Tamil, serif', color:'rgba(255,255,255,.7)', fontSize:15, marginBottom:4 }}>தமிழ் இலக்கியத்தின் நீதிகளை அடுத்த தலைமுறைக்கு கொண்டு செல்வோம்</div>
         <div>Preserving the wisdom of Tamil literature for future generations</div>
         <div style={{ marginTop:8, fontSize:11, opacity:.5 }}>Flipbooks powered by Heyzine</div>
-        <div style={{ marginTop:14 }}>
-          <button onClick={openAdmin} style={{ background:'rgba(255,255,255,.12)', color:'rgba(255,255,255,.7)', border:'1px solid rgba(255,255,255,.2)', padding:'8px 20px', borderRadius:6, fontSize:13, cursor:'pointer', fontFamily:'Inter' }}>
-            🔗 இணைப்புகளை நிர்வகி / Manage Links
-          </button>
-        </div>
       </footer>
 
       {/* ADMIN MODAL */}
