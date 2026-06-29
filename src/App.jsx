@@ -154,7 +154,65 @@ export default function App() {
         </div>
       </header>
 
-      {/* TOOLBAR */}
+      {/* WELCOME STATEMENT */}
+      <div style={{ background:'linear-gradient(135deg, #FDF6E3 0%, #FAF0D7 100%)', borderBottom:'1px solid #E8D5A3' }}>
+        <div style={{ maxWidth:900, margin:'0 auto', padding:'48px 32px', textAlign:'center' }}>
+
+          {/* Decorative top */}
+          <div style={{ color:'#B8860B', fontSize:22, letterSpacing:12, marginBottom:28, opacity:.7 }}>❖ ❖ ❖</div>
+
+          {/* Opening */}
+          <div style={{ fontFamily:'Tiro Tamil, serif', fontSize:'clamp(18px,2.5vw,24px)', color:'#7A1414', fontWeight:400, marginBottom:28, lineHeight:1.6 }}>
+            அன்புடையீர், வணக்கம்.
+          </div>
+
+          {/* Main paragraphs */}
+          <div style={{ fontFamily:'Tiro Tamil, serif', fontSize:'clamp(14px,1.8vw,17px)', color:'#2C1810', lineHeight:2, textAlign:'left', maxWidth:780, margin:'0 auto', display:'flex', flexDirection:'column', gap:20 }}>
+
+            <p>இன்றைய பள்ளிக் கல்வியில், சிறுவர்களின் உள்ளத்தில் அறநெறி விதைக்கும் பாடங்கள் பெருமளவில் மறைந்து வருகின்றன.</p>
+
+            <p>ஒரு காலத்தில் <strong style={{color:'#7A1414'}}>ஆத்திச்சூடி, கொன்றைவேந்தன், மூதுரை, நாலடியார்</strong> போன்ற அறநெறி நூல்கள் பள்ளிப் பாடங்களாக இருந்து, சிறுவயதிலிருந்தே ஒழுக்கம், பண்பு, அன்பு, இரக்கம், பெரியோர் மரியாதை போன்ற உயரிய பண்புகளை இயல்பாக வளர்த்தன.</p>
+
+            <p>இன்று அந்த வாய்ப்பு குறைந்து வருவதால், அந்த அறநெறிச் செல்வங்களை மீண்டும் இளம் தலைமுறையிடம் கொண்டு சேர்க்க வேண்டும் என்பது நமது விருப்பமாக உள்ளது.</p>
+
+            <p>அந்த எண்ணத்தின் அடிப்படையில், சிறுவர்கள் ஆர்வத்துடன் படிக்கும் வகையில், இந்த அறநெறி நூல்களை <strong style={{color:'#7A1414'}}>படக்கதை (Illustrated Story)</strong> வடிவில் வழங்கும் முயற்சியைத் தொடங்கியுள்ளோம். முதல் கட்டமாக <strong style={{color:'#7A1414'}}>ஆத்திச்சூடியின் பன்னிரண்டு பாடல்களுக்கு</strong> படக்கதைகளைத் தயாரித்து பதிவேற்றியுள்ளோம்.</p>
+
+            <p>இது ஒரு தொடர்ச்சியான பணி. தினந்தோறும் புதிய கதைகள் சேர்க்கப்படும். பின்னர் <strong style={{color:'#7A1414'}}>கொன்றைவேந்தன், மூதுரை, நாலடியார்</strong> உள்ளிட்ட பல அறநெறி நூல்களும் இதே வடிவில் வெளியிடப்படும்.</p>
+
+          </div>
+
+          {/* Quote */}
+          <div style={{ margin:'36px auto', maxWidth:600, background:'rgba(122,20,20,0.06)', border:'1px solid rgba(122,20,20,0.15)', borderLeft:'4px solid #7A1414', borderRadius:'0 8px 8px 0', padding:'18px 24px', textAlign:'left' }}>
+            <div style={{ fontFamily:'Tiro Tamil, serif', fontSize:'clamp(15px,2vw,18px)', color:'#7A1414', lineHeight:1.8, fontStyle:'italic' }}>
+              "தொட்டில் பழக்கம் சுடுகாடு வரை"
+            </div>
+            <div style={{ fontFamily:'Tiro Tamil, serif', fontSize:13, color:'#6B5C40', marginTop:8, lineHeight:1.6 }}>
+              சிறுவயதிலேயே அறநெறி விதைகளை விதைப்பது, எதிர்கால நல்ல சமுதாயத்தை உருவாக்கும் மிகச் சிறந்த முதலீடாகும்.
+            </div>
+          </div>
+
+          {/* Call to action */}
+          <div style={{ fontFamily:'Tiro Tamil, serif', fontSize:'clamp(13px,1.6vw,15px)', color:'#4A3520', lineHeight:1.9, maxWidth:720, margin:'0 auto 28px' }}>
+            தாங்கள் அறிந்துள்ள குழந்தைகள், மாணவர்கள், பெற்றோர், ஆசிரியர்கள் அனைவரிடமும் இந்த இணையதளத்தைப் பகிர்ந்து, அவர்கள் இந்தக் கதைகளை வாசிக்கும் வாய்ப்பை உருவாக்கித் தருமாறு அன்புடன் கேட்டுக்கொள்கிறோம்.
+          </div>
+
+          {/* Signature */}
+          <div style={{ fontFamily:'Tiro Tamil, serif', fontSize:15, color:'#7A1414', marginTop:8 }}>
+            வேணும் சற்குருநாதன் துணை.
+          </div>
+
+          {/* Decorative bottom */}
+          <div style={{ color:'#B8860B', fontSize:22, letterSpacing:12, marginTop:28, opacity:.7 }}>❖ ❖ ❖</div>
+
+          {/* Scroll down hint */}
+          <div style={{ marginTop:20, fontSize:13, color:'#6B5C40', display:'flex', alignItems:'center', justifyContent:'center', gap:6 }}>
+            <span>↓</span>
+            <span style={{ fontFamily:'Tiro Tamil, serif' }}>கீழே படக்கதைகளை காணலாம்</span>
+            <span>↓</span>
+          </div>
+
+        </div>
+      </div>
       <div style={{ background:'#fff', borderBottom:'1px solid #D9CEBC', position:'sticky', top:0, zIndex:100 }}>
         <div style={{ maxWidth:1100, margin:'0 auto', padding:'10px 24px', display:'flex', flexDirection:'column', gap:8 }}>
           {/* Row 1 — Search */}
