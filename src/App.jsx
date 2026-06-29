@@ -3,6 +3,7 @@ import { db } from './firebase';
 import { collection, getDocs, doc, setDoc } from 'firebase/firestore';
 import { AC_VERSES, KV_VERSES, MU_VERSES, NAL_VERSES } from './data';
 import { NATARAJA } from './nataraja';
+import { AVVAIYAR } from './avvaiyar';
 
 // ── Sources config ──
 const SOURCES = [
@@ -250,12 +251,23 @@ export default function App() {
               {/* Body */}
               <div style={{ background:'#FFFDF7', padding:'20px 24px' }}>
                 <div style={{ fontSize:19, color:'#7A1414', marginBottom:14 }}>அன்புடையீர், வணக்கம்.</div>
-                <div style={{ fontSize:14, color:'#2C1810', lineHeight:1.95, display:'flex', flexDirection:'column', gap:11 }}>
-                  <p style={{margin:0}}>இன்றைய பள்ளிக் கல்வியில், சிறுவர்களின் உள்ளத்தில் அறநெறி விதைக்கும் பாடங்கள் பெருமளவில் மறைந்து வருகின்றன.</p>
-                  <p style={{margin:0}}>ஒரு காலத்தில் <strong style={{color:'#7A1414'}}>ஆத்திச்சூடி, கொன்றைவேந்தன், ஆசாரக்கோவை, மூதுரை, நாலடியார்</strong> போன்ற அறநெறி நூல்கள் பள்ளிப் பாடங்களாக இருந்து, சிறுவயதிலிருந்தே ஒழுக்கம், பண்பு, அன்பு, இரக்கம், பெரியோர் மரியாதை போன்ற உயரிய பண்புகளை இயல்பாக வளர்த்தன.</p>
-                  <p style={{margin:0}}>இன்று அந்த வாய்ப்பு குறைந்து வருவதால், அந்த அறநெறிச் செல்வங்களை மீண்டும் இளம் தலைமுறையிடம் கொண்டு சேர்க்க வேண்டும் என்பது நமது விருப்பமாக உள்ளது.</p>
-                  <p style={{margin:0}}>அந்த எண்ணத்தின் அடிப்படையில், சிறுவர்கள் ஆர்வத்துடன் படிக்கும் வகையில், இந்த அறநெறி நூல்களை <strong style={{color:'#7A1414'}}>படக்கதை (Illustrated Story)</strong> வடிவில் வழங்கும் முயற்சியைத் தொடங்கியுள்ளோம்.</p>
-                  <p style={{margin:0}}>இது ஒரு தொடர்ச்சியான பணி. தினந்தோறும் புதிய கதைகள் சேர்க்கப்படும். பின்னர் <strong style={{color:'#7A1414'}}>கொன்றைவேந்தன், ஆசாரக்கோவை, மூதுரை, நாலடியார்</strong> உள்ளிட்ட பல அறநெறி நூல்களும் இதே வடிவில் வெளியிடப்படும்.</p>
+                {/* Two column — text + image */}
+                <div style={{ display:'flex', gap:20, alignItems:'flex-start' }}>
+                  <div style={{ flex:1, fontSize:14, color:'#2C1810', lineHeight:1.95, display:'flex', flexDirection:'column', gap:11 }}>
+                    <p style={{margin:0}}>இன்றைய பள்ளிக் கல்வியில், சிறுவர்களின் உள்ளத்தில் அறநெறி விதைக்கும் பாடங்கள் பெருமளவில் மறைந்து வருகின்றன.</p>
+                    <p style={{margin:0}}>ஒரு காலத்தில் <strong style={{color:'#7A1414'}}>ஆத்திச்சூடி, கொன்றைவேந்தன், ஆசாரக்கோவை, மூதுரை, நாலடியார்</strong> போன்ற அறநெறி நூல்கள் பள்ளிப் பாடங்களாக இருந்து, சிறுவயதிலிருந்தே ஒழுக்கம், பண்பு, அன்பு, இரக்கம், பெரியோர் மரியாதை போன்ற உயரிய பண்புகளை இயல்பாக வளர்த்தன.</p>
+                    <p style={{margin:0}}>இன்று அந்த வாய்ப்பு குறைந்து வருவதால், அந்த அறநெறிச் செல்வங்களை மீண்டும் இளம் தலைமுறையிடம் கொண்டு சேர்க்க வேண்டும் என்பது நமது விருப்பமாக உள்ளது.</p>
+                    <p style={{margin:0}}>அந்த எண்ணத்தின் அடிப்படையில், சிறுவர்கள் ஆர்வத்துடன் படிக்கும் வகையில், இந்த அறநெறி நூல்களை <strong style={{color:'#7A1414'}}>படக்கதை (Illustrated Story)</strong> வடிவில் வழங்கும் முயற்சியைத் தொடங்கியுள்ளோம்.</p>
+                    <p style={{margin:0}}>இது ஒரு தொடர்ச்சியான பணி. தினந்தோறும் புதிய கதைகள் சேர்க்கப்படும். பின்னர் <strong style={{color:'#7A1414'}}>கொன்றைவேந்தன், ஆசாரக்கோவை, மூதுரை, நாலடியார்</strong> உள்ளிட்ட பல அறநெறி நூல்களும் இதே வடிவில் வெளியிடப்படும்.</p>
+                  </div>
+                  {/* Avvaiyar image */}
+                  <div style={{ flexShrink:0, width:180 }}>
+                    <img src={AVVAIYAR} alt="ஔவையார் குழந்தைகளுக்கு கற்பிக்கிறார்"
+                      style={{ width:'100%', borderRadius:8, boxShadow:'0 4px 16px rgba(0,0,0,0.15)', border:'2px solid #E8D5A3' }} />
+                    <div style={{ textAlign:'center', fontSize:11, color:'#6B5C40', marginTop:6, fontFamily:'Tiro Tamil, serif', fontStyle:'italic' }}>
+                      ஔவையார் — குழந்தைகளுக்கு நீதி கற்பிக்கிறார்
+                    </div>
+                  </div>
                 </div>
                 <div style={{ display:'flex', flexDirection:'column', gap:11, marginTop:18 }}>
                   {[
@@ -278,7 +290,6 @@ export default function App() {
                 <span style={{ fontSize:15 }}>🪷</span>
               </div>
             </div>
-            <div style={{ textAlign:'center', marginTop:16, fontSize:13, color:'#6B5C40', fontFamily:'Tiro Tamil, serif' }}>↓ கீழே படக்கதைகளை காணலாம் ↓</div>
           </div>
 
           {/* Book sections */}
