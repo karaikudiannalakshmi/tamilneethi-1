@@ -1034,7 +1034,264 @@ function setFilter(el, filter) {
   applyFilters();
 }
 
-function applyFilters() { renderAll();
+function applyFilters() { renderAll(); }
+
+function updateCounts() {
+  const q = document.getElementById('si').value.toLowerCase().trim();
+  const el = document.getElementById('cnt-all');
+  if (el) el.textContent = BOOKS.filter(b => matchesQuery(b,q)).length;
+  SOURCES.forEach(src => {
+    const c = BOOKS.filter(b => b.source === src.id && matchesQuery(b,q)).length;
+    const el2 = document.getElementById('cnt-' + src.id);
+    if (el2) el2.textContent = c;
+  });
+}
+
+function matchesQuery(book, q) {
+  if (!q) return true;
+  return [book.ta, book.en, String(book.num)].join(' ').toLowerCase().includes(q);
+}
+
+function setFilter(el, filter) {
+  document.querySelectorAll('.fb').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  activeFilter = filter;
+  applyFilters();
+}
+
+function toggleSection(id) {
+  const body = document.getElementById('secbody-' + id);
+  const tog = document.getElementById('tog-' + id);
+  const hidden = body.style.display === 'none';
+  body.style.display = hidden ? '' : 'none';
+  tog.textContent = hidden ? '▼' : '▶';
+}
+
+function switchTab(subId, tab) {
+  const readyGrid  = document.getElementById('grid-ready-' + subId);
+  const comingGrid = document.getElementById('grid-coming-' + subId);
+  const readyBtn   = document.getElementById('tab-ready-' + subId);
+  const comingBtn  = document.getElementById('tab-coming-' + subId);
+  if (!readyGrid || !comingGrid) return;
+  if (tab === 'ready') {
+    readyGrid.style.display = ''; comingGrid.style.display = 'none';
+    readyBtn.classList.add('active'); comingBtn.classList.remove('active');
+  } else {
+    readyGrid.style.display = 'none'; comingGrid.style.display = '';
+    comingBtn.classList.add('active'); readyBtn.classList.remove('active');
+  }
+}
+
+function togglePoem(el) {
+  const txt = el.querySelector('.bpoem-text');
+  const isHidden = txt.style.display === 'none';
+  txt.style.display = isHidden ? 'block' : 'none';
+  el.childNodes[0].textContent = isHidden ? '📜 பாடல் மறை / Hide verse' : '📜 பாடல் காண்க / Show verse';
+}
+
+function editBookUrl(bookId) {
+  const book = BOOKS.find(b => b.id === bookId);
+  if (!book) return;
+  const url = prompt('Heyzine URL for "' + book.num + '. ' + book.ta + '":', book.url || '');
+  if (url === null) return;
+  book.url = url.trim();
+  renderAll();
+}
+
+function openAddModal(srcId, subId) {
+  const sel = document.getElementById('f_src');
+  sel.innerHTML = '<option value="">— தேர்வு செய்யுங்கள் —</option>';
+  SOURCES.forEach(s => { sel.innerHTML += '<option value="' + s.id + '">' + s.icon + ' ' + s.ta + '</option>'; });
+  if (srcId) { sel.value = srcId; updateSubSel(); }
+  if (subId) document.getElementById('f_sub').value = subId;
+  document.getElementById('addModal').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('addModal').classList.remove('open');
+}
+
+function updateSubSel() {
+  const srcId = document.getElementById('f_src').value;
+  const sel = document.getElementById('f_sub');
+  sel.innerHTML = '<option value="">— தேர்வு செய்யுங்கள் —</option>';
+  const src = SOURCES.find(s => s.id === srcId);
+  if (src) src.subs.forEach(s => { sel.innerHTML += '<option value="' + s.id + '">' + s.ta + '</option>'; });
+}
+
+function saveBook() {
+  const ta = document.getElementById('f_tta').value.trim();
+  const source = document.getElementById('f_src').value;
+  if (!ta || !source) { alert('Title and Source required.'); return; }
+  const book = {
+    id: 'extra_' + Date.now(), num: BOOKS.filter(b=>b.source===source).length+1,
+    ta, en: document.getElementById('f_ten').value.trim(),
+    source, sub: document.getElementById('f_sub').value,
+    url: document.getElementById('f_url').value.trim(), cover: '', poem: '', tags: []
+  };
+  BOOKS.push(book);
+  closeModal(); renderAll();
+}
+
+function exportData() {
+  const blob = new Blob([JSON.stringify(BOOKS,null,2)],{type:'application/json'});
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+  a.download = 'tamil-stories-books.json'; a.click();
+}
+
+// ── GITHUB CONFIG ──
+const GH_OWNER = 'koviloormadalayam-dotcom';
+const GH_REPO  = 'tamilneethi';
+const GH_FILE  = 'index.html';
+const GH_BRANCH= 'main';
+const ADMIN_PASSWORD = 'Koviloor@07';
+let adminUnlocked = false;
+let ghToken = localStorage.getItem('tsl_gh_token') || '';
+
+function checkToken() {
+  if (!ghToken) {
+    const t = prompt('GitHub Token இல்லை. உங்கள் Personal Access Token ஐ உள்ளிடவும்:');
+    if (!t) return false;
+    ghToken = t.trim();
+    localStorage.setItem('tsl_gh_token', ghToken);
+  }
+  return true;
+}
+
+function clearToken() {
+  localStorage.removeItem('tsl_gh_token');
+  ghToken = '';
+  alert('Token cleared.');
+}
+
+function openLinkManager() {
+  if (!adminUnlocked) {
+    const pwd = prompt('கடவுச்சொல் / Password:');
+    if (pwd !== ADMIN_PASSWORD) { alert('தவறான கடவுச்சொல்.'); return; }
+    adminUnlocked = true;
+  }
+  const sel = document.getElementById('lm_src');
+  sel.innerHTML = '<option value="">— தேர்வு செய்யுங்கள் —</option>';
+  SOURCES.forEach(s => { sel.innerHTML += '<option value="' + s.id + '">' + s.icon + ' ' + s.ta + '</option>'; });
+  sel.value = SOURCES[0].id;
+  loadLinkList();
+  document.getElementById('linkModal').classList.add('open');
+}
+
+function closeLinkModal() {
+  document.getElementById('linkModal').classList.remove('open');
+  adminUnlocked = false;
+  renderAll();
+}
+
+function loadLinkList() {
+  const srcId = document.getElementById('lm_src').value;
+  const list = document.getElementById('lm_list');
+  if (!srcId) { list.innerHTML = ''; return; }
+  const srcBooks = BOOKS.filter(b => b.source === srcId);
+  const src = SOURCES.find(s => s.id === srcId);
+  list.innerHTML = '';
+  src.subs.forEach(sub => {
+    const subBooks = srcBooks.filter(b => b.sub === sub.id);
+    if (!subBooks.length) return;
+    const hdr = document.createElement('div');
+    hdr.style.cssText = 'background:var(--gold-light);padding:8px 14px;font-size:12px;font-weight:600;color:var(--gold);border-bottom:1px solid #E8D080;';
+    hdr.textContent = sub.ta + ' — ' + sub.en;
+    list.appendChild(hdr);
+    subBooks.forEach(book => {
+      const hasLink = book.url && book.url.trim() !== '';
+      const row = document.createElement('div');
+      row.style.cssText = 'display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--border);';
+      row.innerHTML =
+        '<div id="ind-' + book.id + '" style="flex:0 0 28px;width:28px;height:28px;border-radius:50%;background:' + (hasLink?'#E8F5E9':'var(--red-light)') + ';display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:' + (hasLink?'#2E7D32':'var(--red)') + ';">' + (hasLink?'✓':book.num) + '</div>' +
+        '<div style="flex:1;min-width:0;"><div style="font-family:Tiro Tamil,serif;font-size:13px;">' + book.num + '. ' + book.ta + '</div><div id="prev-' + book.id + '" style="font-size:11px;color:var(--ink-muted);">' + (hasLink?book.url:'இணைப்பு இல்லை') + '</div></div>' +
+        '<input type="url" id="inp-' + book.id + '" value="' + (book.url||'') + '" placeholder="https://heyzine.com/flip-book/…" style="width:200px;padding:6px 10px;border:1px solid var(--border);border-radius:6px;font-size:12px;background:var(--cream);outline:none;flex-shrink:0;">' +
+        '<button onclick="saveOneUrl('' + book.id + '')" id="savebtn-' + book.id + '" style="padding:6px 12px;background:var(--red);color:#fff;border:none;border-radius:6px;font-size:12px;cursor:pointer;flex-shrink:0;">Save</button>';
+      list.appendChild(row);
+    });
+  });
+}
+
+async function saveOneUrl(bookId) {
+  if (!checkToken()) return;
+  const book = BOOKS.find(b => b.id === bookId);
+  if (!book) return;
+  const input = document.getElementById('inp-' + bookId);
+  const btn   = document.getElementById('savebtn-' + bookId);
+  const url   = input.value.trim();
+  btn.textContent = '⏳'; btn.disabled = true;
+  book.url = url;
+  try {
+    const getResp = await fetch(
+      'https://api.github.com/repos/' + GH_OWNER + '/' + GH_REPO + '/contents/' + GH_FILE + '?ref=' + GH_BRANCH,
+      { headers: { 'Authorization': 'token ' + ghToken, 'Accept': 'application/vnd.github.v3+json' } }
+    );
+    if (!getResp.ok) throw new Error('GitHub fetch failed: ' + getResp.status);
+    const fileData = await getResp.json();
+    const sha = fileData.sha;
+    let fileHtml = decodeURIComponent(escape(atob(fileData.content.replace(/\n/g,''))));
+    fileHtml = updateUrlInHtml(fileHtml, bookId, url);
+    const encoded = btoa(unescape(encodeURIComponent(fileHtml)));
+    const putResp = await fetch(
+      'https://api.github.com/repos/' + GH_OWNER + '/' + GH_REPO + '/contents/' + GH_FILE,
+      { method: 'PUT',
+        headers: { 'Authorization': 'token ' + ghToken, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: 'Update: ' + book.ta, content: encoded, sha: sha, branch: GH_BRANCH })
+      }
+    );
+    if (!putResp.ok) { const err = await putResp.json(); throw new Error(err.message||'Push failed'); }
+    const ind = document.getElementById('ind-' + bookId);
+    const prev = document.getElementById('prev-' + bookId);
+    if (ind) { ind.textContent = url?'✓':book.num; ind.style.background=url?'#E8F5E9':'var(--red-light)'; ind.style.color=url?'#2E7D32':'var(--red)'; }
+    if (prev) prev.textContent = url||'இணைப்பு இல்லை';
+    btn.textContent = '✓'; btn.style.background='#2E7D32';
+    setTimeout(()=>{ btn.textContent='Save'; btn.style.background='var(--red)'; btn.disabled=false; },3000);
+    showNotice('✓ Saved to GitHub! Live in 2–3 min.','success');
+  } catch(e) {
+    btn.textContent='✗'; btn.style.background='#c0392b'; btn.disabled=false;
+    setTimeout(()=>{ btn.textContent='Save'; btn.style.background='var(--red)'; },3000);
+    showNotice('Error: '+e.message,'error');
+  }
+}
+
+function updateUrlInHtml(html, bookId, url) {
+  const urlsMapMatch = html.match(/const URLS_MAP=(\{[^;]+\});/);
+  let urlsMap = {};
+  if (urlsMapMatch) {
+    try { urlsMap = JSON.parse(urlsMapMatch[1]); } catch(_) {}
+    html = html.replace(/const URLS_MAP=\{[^;]+\};
+applyUrlsMap\(\);
+renderAll\(\);/, '');
+  }
+  if (url) urlsMap[bookId] = url; else delete urlsMap[bookId];
+  const newBlock = 'const URLS_MAP=' + JSON.stringify(urlsMap) + ';\napplyUrlsMap();\nrenderAll();';
+  const lastScript = html.lastIndexOf('<\/script>');
+  html = html.slice(0, lastScript) + '\n' + newBlock + '\n' + html.slice(lastScript);
+  return html;
+}
+
+function showNotice(msg, type) {
+  let n = document.getElementById('gh-notice');
+  if (!n) {
+    n = document.createElement('div'); n.id='gh-notice';
+    n.style.cssText='position:fixed;bottom:20px;left:50%;transform:translateX(-50%);padding:12px 24px;border-radius:8px;font-size:14px;font-family:Inter,sans-serif;z-index:9999;box-shadow:0 4px 16px rgba(0,0,0,.2);max-width:90vw;text-align:center;transition:opacity .3s;';
+    document.body.appendChild(n);
+  }
+  n.textContent=msg; n.style.background=type==='success'?'#2E7D32':'#c0392b'; n.style.color='#fff'; n.style.opacity='1';
+  clearTimeout(n._t); n._t=setTimeout(()=>{n.style.opacity='0';},5000);
+}
+
+function applyUrlsMap() {
+  if (typeof URLS_MAP === 'undefined') return;
+  BOOKS.forEach(b => { if (URLS_MAP[b.id]) b.url = URLS_MAP[b.id]; });
+}
+
+function toggleAdmin() {}
+
+// ── INIT ──
+buildFilterButtons();
+renderAll();
+
 const URLS_MAP={"aathichudi_1": "https://heyzine.com/flip-book/53b85e56cb.html", "aathichudi_2": "https://heyzine.com/flip-book/165f4dc9a0.html", "aathichudi_3": "https://heyzine.com/flip-book/4e7d82bf67.html", "aathichudi_4": "https://heyzine.com/flip-book/3a86fa8542.html", "aathichudi_5": "https://heyzine.com/flip-book/1eb743e037.html", "aathichudi_6": "https://heyzine.com/flip-book/fd951e7fa9.html", "aathichudi_7": "https://heyzine.com/flip-book/e800bf7b64.html", "aathichudi_8": "https://heyzine.com/flip-book/3f6e857380.html", "aathichudi_9": "https://heyzine.com/flip-book/d428cbfbcf.html", "aathichudi_10": "https://heyzine.com/flip-book/c941d89dad.html", "aathichudi_11": "https://heyzine.com/flip-book/ca77337385.html", "aathichudi_12": "https://heyzine.com/flip-book/8e50cd78e8.html", "aathichudi_13": "https://heyzine.com/flip-book/a2d1f22ca0.html", "aathichudi_14": "https://heyzine.com/flip-book/e53d87a2eb.html", "aathichudi_15": "https://heyzine.com/flip-book/0afe6e40fb.html", "aathichudi_20": "https://heyzine.com/flip-book/79ae5dc27a.html", "aathichudi_89": "https://heyzine.com/flip-book/7f7df88d32.html", "aathichudi_90": "https://heyzine.com/flip-book/7b192c93af.html", "aathichudi_93": "https://heyzine.com/flip-book/904f5afd3e.html"};
 applyUrlsMap();
 renderAll();
