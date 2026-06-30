@@ -21,12 +21,13 @@ const SOURCES = [
     id:'aathichudi', ta:'ஆத்திசூடி', en:'Aathichudi', author:'ஔவையார் (Avvaiyar)', icon:'🌺',
     desc:'ஔவையார் இயற்றிய 109 ஒற்றை வரி நீதி மொழிகள் — அகர வரிசையில் அமைந்தவை.',
     subs:[
-      {id:'ac_uir', ta:'உயிர் வருக்கம் (1–13)',  en:'Vowel Series 1–13'},
-      {id:'ac_ka',  ta:'க வருக்கம் (14–43)',     en:'Ka Series 14–43'},
-      {id:'ac_sa',  ta:'ச–ஞ வருக்கம் (44–53)',   en:'Sa–Nya Series 44–53'},
-      {id:'ac_ta',  ta:'த–ந வருக்கம் (54–75)',   en:'Ta–Na Series 54–75'},
-      {id:'ac_pa',  ta:'ப–ம வருக்கம் (76–97)',   en:'Pa–Ma Series 76–97'},
-      {id:'ac_va',  ta:'வ–ஒ வருக்கம் (98–109)',  en:'Va–O Series 98–109'},
+      {id:'ac_uir',     ta:'உயிர் வருக்கம் (1–13)',      en:'Vowel Series 1–13'},
+      {id:'ac_uyirmei', ta:'உயிர்மெய் வருக்கம் (14–31)', en:'Uyirmei Series 14–31'},
+      {id:'ac_ka',      ta:'க வருக்கம் (32–43)',         en:'Ka Series 32–43'},
+      {id:'ac_sa',      ta:'ச–ஞ வருக்கம் (44–53)',       en:'Sa–Nya Series 44–53'},
+      {id:'ac_ta',      ta:'த–ந வருக்கம் (54–75)',       en:'Ta–Na Series 54–75'},
+      {id:'ac_pa',      ta:'ப–ம வருக்கம் (76–97)',       en:'Pa–Ma Series 76–97'},
+      {id:'ac_va',      ta:'வ–ஒ வருக்கம் (98–109)',      en:'Va–O Series 98–109'},
     ]
   },
   {
