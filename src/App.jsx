@@ -459,12 +459,12 @@ function SubSection({ sub, src, subBooks, query, saving, onSave, expandedPoem, s
 }
 
 // ── Book card ──
-// Per-work cover color themes
+// Per-work cover color themes — light orange family
 const COVER_THEMES = {
-  aathichudi:     { bg1:'#F9E0E8', bg2:'#F0BFD0', ink:'#7A1438', accent:'#C2185B' },
-  kondraivendum:  { bg1:'#E2F0E0', bg2:'#BEDFB8', ink:'#1B5E20', accent:'#388E3C' },
-  muthurai:       { bg1:'#E0EFF2', bg2:'#B8DCE3', ink:'#0D4F5C', accent:'#00838F' },
-  naladiyar:      { bg1:'#F3E6D5', bg2:'#E3C9A3', ink:'#6D4C12', accent:'#A1750D' },
+  aathichudi:     { bg1:'#FFEAD2', bg2:'#FFD3A0', ink:'#8A4B0B', accent:'#D87A1A' },
+  kondraivendum:  { bg1:'#FFF1DE', bg2:'#FFDCAE', ink:'#8F520C', accent:'#E08B23' },
+  muthurai:       { bg1:'#FFE6C9', bg2:'#FFC988', ink:'#7A4108', accent:'#CC6F12' },
+  naladiyar:      { bg1:'#FFEFD9', bg2:'#FFD9A8', ink:'#8C4F0E', accent:'#DD8420' },
 };
 
 function BookCard({ book, src, expandedPoem, setExpandedPoem }) {
