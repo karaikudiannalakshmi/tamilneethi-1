@@ -1,9 +1,19 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { db } from './firebase';
 import { collection, getDocs, doc, setDoc } from 'firebase/firestore';
 import { AC_VERSES, KV_VERSES, MU_VERSES, NAL_VERSES } from './data';
 import { NATARAJA } from './nataraja';
 import { AVVAIYAR } from './avvaiyar';
+
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  useEffect(() => {
+    const fn = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener('resize', fn);
+    return () => window.removeEventListener('resize', fn);
+  }, []);
+  return isMobile;
+}
 
 // ── Sources config ──
 const SOURCES = [
@@ -84,7 +94,8 @@ export default function App() {
   const [notice, setNotice]         = useState(null);
   const [expandedPoem, setExpandedPoem] = useState(null);
 
-  // Load URLs from Firestore
+  const isMobile = useIsMobile();
+  const [menuOpen, setMenuOpen] = useState(false);
   useEffect(() => {
     async function load() {
       try {
@@ -155,10 +166,37 @@ export default function App() {
         </div>
       </header>
 
-      {/* BODY: Sidebar + Scrollable Content */}
-      <div style={{ display:'flex', height:'calc(100vh - 0px)' }}>
+      {/* MOBILE: Bottom tab bar */}
+      {isMobile && (
+        <div style={{ position:'fixed', bottom:0, left:0, right:0, background:'#fff', borderTop:'1px solid #D9CEBC', zIndex:200, display:'flex', alignItems:'center', padding:'0 4px' }}>
+          <button onClick={()=>{ setFilter('all'); setMenuOpen(false); window.scrollTo({top:0,behavior:'smooth'}); }}
+            style={{ flex:1, padding:'10px 4px', border:'none', background:'transparent', color:filter==='all'?'#7A1414':'#6B5C40', fontSize:11, cursor:'pointer', fontFamily:'Tiro Tamil, serif', borderTop:filter==='all'?'2px solid #7A1414':'2px solid transparent', display:'flex', flexDirection:'column', alignItems:'center', gap:2 }}>
+            <span style={{fontSize:16}}>📜</span><span>அறிமுகம்</span>
+          </button>
+          {SOURCES.map(src => {
+            const cnt = books.filter(b=>b.source===src.id && b.url).length;
+            const active = filter===src.id;
+            return (
+              <button key={src.id} onClick={()=>{ setFilter(src.id); setMenuOpen(false); setTimeout(()=>document.getElementById('sec-'+src.id)?.scrollIntoView({behavior:'smooth'}),50); }}
+                style={{ flex:1, padding:'10px 4px', border:'none', background:'transparent', color:active?'#7A1414':'#6B5C40', fontSize:10, cursor:'pointer', fontFamily:'Tiro Tamil, serif', borderTop:active?'2px solid #7A1414':'2px solid transparent', display:'flex', flexDirection:'column', alignItems:'center', gap:2 }}>
+                <span style={{fontSize:15}}>{src.icon}</span>
+                <span style={{whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis',maxWidth:60}}>{src.ta}</span>
+                {cnt > 0 && <span style={{fontSize:9,background:'#E8F5E9',color:'#2E7D32',padding:'0 4px',borderRadius:6}}>{cnt}</span>}
+              </button>
+            );
+          })}
+          <button onClick={openAdmin}
+            style={{ flex:0.6, padding:'10px 4px', border:'none', background:'transparent', color:'#6B5C40', fontSize:10, cursor:'pointer', display:'flex', flexDirection:'column', alignItems:'center', gap:2 }}>
+            <span style={{fontSize:15}}>🔗</span><span>Links</span>
+          </button>
+        </div>
+      )}
 
-        {/* ── LEFT SIDEBAR ── */}
+      {/* BODY: Sidebar + Scrollable Content */}
+      <div style={{ display:'flex' }}>
+
+        {/* ── LEFT SIDEBAR (desktop only) ── */}
+        {!isMobile && (
         <div style={{ width:210, flexShrink:0, background:'#fff', borderRight:'1px solid #D9CEBC', position:'sticky', top:0, height:'100vh', overflowY:'auto', display:'flex', flexDirection:'column' }}>
           {/* Search */}
           <div style={{ padding:'10px 10px 8px', borderBottom:'1px solid #D9CEBC' }}>
@@ -214,9 +252,21 @@ export default function App() {
             </button>
           </div>
         </div>
+        )}
 
         {/* ── SCROLLABLE CONTENT ── */}
-        <div style={{ flex:1, minWidth:0, overflowY:'auto', height:'100vh' }}>
+        <div style={{ flex:1, minWidth:0, overflowY:'auto', height:'100vh', paddingBottom: isMobile ? 70 : 0 }}>
+
+          {/* Mobile search bar */}
+          {isMobile && (
+            <div style={{ padding:'10px 12px', background:'#fff', borderBottom:'1px solid #D9CEBC', position:'sticky', top:0, zIndex:100 }}>
+              <div style={{ position:'relative' }}>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6B5C40" strokeWidth="2" style={{ position:'absolute', left:10, top:'50%', transform:'translateY(-50%)' }}><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input value={query} onChange={e=>setQuery(e.target.value)} placeholder="தேடு…"
+                  style={{ width:'100%', padding:'9px 12px 9px 30px', border:'1px solid #D9CEBC', borderRadius:8, fontSize:14, background:'#FAF6ED', color:'#1A1208', outline:'none', boxSizing:'border-box', fontFamily:'Inter' }} />
+              </div>
+            </div>
+          )}
 
           {/* INVITATION */}
           <div id="intro-box" style={{ background:'#FAF6ED', padding:'24px 20px 28px' }}>
@@ -251,8 +301,8 @@ export default function App() {
               {/* Body */}
               <div style={{ background:'#FFFDF7', padding:'20px 24px' }}>
                 <div style={{ fontSize:19, color:'#7A1414', marginBottom:14 }}>அன்புடையீர், வணக்கம்.</div>
-                {/* Two column — text + image */}
-                <div style={{ display:'flex', gap:20, alignItems:'flex-start' }}>
+                {/* Two column on desktop, single on mobile */}
+                <div style={{ display:'flex', gap:20, alignItems:'flex-start', flexDirection: isMobile ? 'column' : 'row' }}>
                   <div style={{ flex:1, fontSize:14, color:'#2C1810', lineHeight:1.95, display:'flex', flexDirection:'column', gap:11 }}>
                     <p style={{margin:0}}>இன்றைய பள்ளிக் கல்வியில், சிறுவர்களின் உள்ளத்தில் அறநெறி விதைக்கும் பாடங்கள் பெருமளவில் மறைந்து வருகின்றன.</p>
                     <p style={{margin:0}}>ஒரு காலத்தில் <strong style={{color:'#7A1414'}}>ஆத்திச்சூடி, கொன்றைவேந்தன், ஆசாரக்கோவை, மூதுரை, நாலடியார்</strong> போன்ற அறநெறி நூல்கள் பள்ளிப் பாடங்களாக இருந்து, சிறுவயதிலிருந்தே ஒழுக்கம், பண்பு, அன்பு, இரக்கம், பெரியோர் மரியாதை போன்ற உயரிய பண்புகளை இயல்பாக வளர்த்தன.</p>
@@ -261,7 +311,7 @@ export default function App() {
                     <p style={{margin:0}}>இது ஒரு தொடர்ச்சியான பணி. தினந்தோறும் புதிய கதைகள் சேர்க்கப்படும். பின்னர் <strong style={{color:'#7A1414'}}>கொன்றைவேந்தன், ஆசாரக்கோவை, மூதுரை, நாலடியார்</strong> உள்ளிட்ட பல அறநெறி நூல்களும் இதே வடிவில் வெளியிடப்படும்.</p>
                   </div>
                   {/* Avvaiyar image */}
-                  <div style={{ flexShrink:0, width:180 }}>
+                  <div style={{ flexShrink:0, width: isMobile ? '100%' : 180 }}>
                     <img src={AVVAIYAR} alt="ஔவையார் குழந்தைகளுக்கு கற்பிக்கிறார்"
                       style={{ width:'100%', borderRadius:8, boxShadow:'0 4px 16px rgba(0,0,0,0.15)', border:'2px solid #E8D5A3' }} />
                     <div style={{ textAlign:'center', fontSize:11, color:'#6B5C40', marginTop:6, fontFamily:'Tiro Tamil, serif', fontStyle:'italic' }}>
