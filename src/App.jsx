@@ -459,19 +459,67 @@ function SubSection({ sub, src, subBooks, query, saving, onSave, expandedPoem, s
 }
 
 // ── Book card ──
+// Per-work cover color themes
+const COVER_THEMES = {
+  aathichudi:     { bg1:'#F9E0E8', bg2:'#F0BFD0', ink:'#7A1438', accent:'#C2185B' },
+  kondraivendum:  { bg1:'#E2F0E0', bg2:'#BEDFB8', ink:'#1B5E20', accent:'#388E3C' },
+  muthurai:       { bg1:'#E0EFF2', bg2:'#B8DCE3', ink:'#0D4F5C', accent:'#00838F' },
+  naladiyar:      { bg1:'#F3E6D5', bg2:'#E3C9A3', ink:'#6D4C12', accent:'#A1750D' },
+};
+
 function BookCard({ book, src, expandedPoem, setExpandedPoem }) {
   const isExpanded = expandedPoem === book.id;
+  const theme = COVER_THEMES[book.source] || COVER_THEMES.aathichudi;
+
   return (
     <div style={{ background:'#FFFDF7', border:'1px solid #D9CEBC', borderRadius:10, overflow:'hidden', display:'flex', flexDirection:'column', transition:'transform .18s, box-shadow .18s' }}
       onMouseEnter={e=>{e.currentTarget.style.transform='translateY(-3px)';e.currentTarget.style.boxShadow='0 8px 24px rgba(26,18,8,.08)';}}
       onMouseLeave={e=>{e.currentTarget.style.transform='';e.currentTarget.style.boxShadow='';}}>
-      {/* Cover */}
-      <div style={{ aspectRatio:'3/4', background:'linear-gradient(145deg,#F5E8E0,#EDD8C8)', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', position:'relative', padding:16 }}>
-        <div style={{ fontSize:28, opacity:.5, marginBottom:8 }}>{src.icon}</div>
-        <div style={{ fontFamily:'Lora, serif', fontSize:24, fontWeight:600, color:'#7A1414', opacity:.45 }}>{book.num}</div>
-        <span style={{ position:'absolute', top:8, right:8, background:'rgba(255,255,255,.92)', color:'#7A1414', fontSize:10, fontWeight:600, padding:'2px 7px', borderRadius:4 }}>FLIP</span>
+
+      {/* ── BOOK COVER ── */}
+      <div style={{
+        aspectRatio:'3/4', position:'relative', overflow:'hidden',
+        background:`linear-gradient(160deg, ${theme.bg1} 0%, ${theme.bg2} 100%)`,
+        display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'space-between',
+        padding:'14px 10px',
+      }}>
+        {/* Decorative corner flourishes */}
+        <svg width="100%" height="100%" viewBox="0 0 200 260" style={{ position:'absolute', inset:0, opacity:0.5 }} preserveAspectRatio="none">
+          <rect x="8" y="8" width="184" height="244" fill="none" stroke={theme.accent} strokeWidth="1.5" opacity="0.55" />
+          <rect x="13" y="13" width="174" height="234" fill="none" stroke={theme.accent} strokeWidth="0.75" opacity="0.4" />
+        </svg>
+
+        {/* Top: work icon */}
+        <div style={{ position:'relative', zIndex:1, fontSize:22, marginTop:4 }}>{src.icon}</div>
+
+        {/* Middle: Title of the WORK (not verse) */}
+        <div style={{ position:'relative', zIndex:1, textAlign:'center', display:'flex', flexDirection:'column', alignItems:'center', gap:6 }}>
+          <div style={{ fontFamily:'Tiro Tamil, serif', fontSize:20, fontWeight:400, color:theme.ink, lineHeight:1.25, textShadow:'0 1px 2px rgba(255,255,255,0.5)' }}>
+            {src.ta}
+          </div>
+          <div style={{ width:36, height:1.5, background:theme.accent, opacity:0.6 }} />
+          <div style={{ fontFamily:'Lora, serif', fontSize:10, fontStyle:'italic', color:theme.ink, opacity:0.75 }}>
+            {src.en}
+          </div>
+        </div>
+
+        {/* Bottom: verse number badge */}
+        <div style={{ position:'relative', zIndex:1, display:'flex', flexDirection:'column', alignItems:'center', gap:2, marginBottom:2 }}>
+          <div style={{
+            width:34, height:34, borderRadius:'50%',
+            background:theme.accent, color:'#fff',
+            display:'flex', alignItems:'center', justifyContent:'center',
+            fontFamily:'Lora, serif', fontSize:14, fontWeight:600,
+            boxShadow:'0 2px 6px rgba(0,0,0,0.18)',
+          }}>
+            {book.num}
+          </div>
+        </div>
+
+        <span style={{ position:'absolute', top:8, right:8, background:'rgba(255,255,255,.9)', color:theme.ink, fontSize:9, fontWeight:600, padding:'2px 6px', borderRadius:4, zIndex:2 }}>FLIP</span>
       </div>
-      {/* Info */}
+
+      {/* ── INFO ── */}
       <div style={{ padding:'11px 13px 13px', flex:1, display:'flex', flexDirection:'column', gap:5 }}>
         <div style={{ fontFamily:'Tiro Tamil, serif', fontSize:14, color:'#1A1208', lineHeight:1.4 }}>{book.num}. {book.ta}</div>
         {book.en && <div style={{ fontSize:11.5, color:'#6B5C40', fontStyle:'italic', lineHeight:1.3 }}>{book.en}</div>}
