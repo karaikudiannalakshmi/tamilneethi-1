@@ -57,12 +57,11 @@ const SOURCES = [
     id:'naladiyar', ta:'நாலடியார்', en:'Naladiyar', author:'சமண முனிவர்கள்', icon:'📿',
     desc:'சமண முனிவர்களால் இயற்றப்பட்ட 400 வெண்பாக்கள் — நான்கு பிரிவுகளாக அமைந்தவை.',
     subs:[
-      {id:'nal_aram1', ta:'அறவியல் — துறவு (1–40)',      en:'Virtue — Renunciation 1–40'},
-      {id:'nal_aram2', ta:'அறவியல் — இல்லறம் (41–100)',  en:'Virtue — Householder 41–100'},
-      {id:'nal_por1',  ta:'பொருளியல் — அரசியல் (101–160)',en:'Wealth — Polity 101–160'},
-      {id:'nal_por2',  ta:'பொருளியல் — நட்பு (161–200)', en:'Wealth — Friendship 161–200'},
-      {id:'nal_inb',   ta:'இன்பவியல் (201–300)',         en:'Love — Inbam 201–300'},
-      {id:'nal_veedu', ta:'துறவறவியல் (301–400)',        en:'Renunciation 301–400'},
+      {id:'nal_aram1', ta:'அறத்துப்பால் — பகுதி 1 (1–40)',   en:'Virtue — Part 1: Impermanence (1–40)'},
+      {id:'nal_aram2', ta:'அறத்துப்பால் — பகுதி 2 (41–130)', en:'Virtue — Part 2: Conduct (41–130)'},
+      {id:'nal_por1',  ta:'பொருட்பால் — பகுதி 1 (131–200)',  en:'Wealth — Part 1: Birth & Learning (131–200)'},
+      {id:'nal_por2',  ta:'பொருட்பால் — பகுதி 2 (201–370)',  en:'Wealth — Part 2: Friendship & Life (201–370)'},
+      {id:'nal_inb',   ta:'காமத்துப்பால் (371–400)',          en:'Love — Kamathupal (371–400)'},
     ]
   },
 ];
